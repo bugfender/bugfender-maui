@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,6 +87,10 @@
     <ProjectReference Include="..\BugfenderTest\BugfenderTest.csproj">
       <Project>{7160E20C-173C-43AA-A4C8-DFC398B1FFEC}</Project>
       <Name>BugfenderTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BugfenderBinding.Android\BugfenderBinding.Android.csproj">
+      <Project>{ACC605A1-85AB-4CC8-9E4D-8ED7E3DACFD8}</Project>
+      <Name>BugfenderBinding.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
