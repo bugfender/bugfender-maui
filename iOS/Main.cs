@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace BugfenderTest.iOS
+namespace XamarinSample.iOS
 {
 	public class Application
 	{
