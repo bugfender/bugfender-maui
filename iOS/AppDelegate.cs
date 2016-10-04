@@ -5,6 +5,8 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
+using BugfenderSDK;
+
 namespace BugfenderTest.iOS
 {
 	[Register("AppDelegate")]
