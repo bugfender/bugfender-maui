@@ -44,16 +44,6 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamarinSample\XamarinSample.csproj">
-      <Project>{773065E0-B831-47AA-B2D9-E52C9CD8B8FC}</Project>
-      <Name>XamarinSample</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Xamarin\BugfenderTest\BugfenderBinding.Android\BugfenderBinding.Droid.csproj">
-      <Project>{ACC605A1-85AB-4CC8-9E4D-8ED7E3DACFD8}</Project>
-      <Name>BugfenderBinding.Droid</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +62,16 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugfenderBinding.Droid\BugfenderBinding.Droid.csproj">
+      <Project>{ACC605A1-85AB-4CC8-9E4D-8ED7E3DACFD8}</Project>
+      <Name>BugfenderBinding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XamarinSample\XamarinSample.csproj">
+      <Project>{773065E0-B831-47AA-B2D9-E52C9CD8B8FC}</Project>
+      <Name>XamarinSample</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

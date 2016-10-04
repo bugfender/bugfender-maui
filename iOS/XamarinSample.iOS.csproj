@@ -90,16 +90,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamarinSample\XamarinSample.csproj">
-      <Project>{773065E0-B831-47AA-B2D9-E52C9CD8B8FC}</Project>
-      <Name>XamarinSample</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Xamarin\BugfenderTest\BugfenderBinding.iOS\BugfenderBinding.iOS.csproj">
-      <Project>{B53A3FE0-58F9-481F-9EBA-3D8CC6CAFD0F}</Project>
-      <Name>BugfenderBinding.iOS</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
   </ItemGroup>
@@ -121,6 +111,16 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugfenderBinding.iOS\BugfenderBinding.iOS.csproj">
+      <Project>{B53A3FE0-58F9-481F-9EBA-3D8CC6CAFD0F}</Project>
+      <Name>BugfenderBinding.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XamarinSample\XamarinSample.csproj">
+      <Project>{773065E0-B831-47AA-B2D9-E52C9CD8B8FC}</Project>
+      <Name>XamarinSample</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
