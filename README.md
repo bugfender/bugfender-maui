@@ -29,6 +29,7 @@ using BugfenderSDK;
 * Replace *YOUR APP KEY* with your Bugfender app key.
 * For more information, have a look at the [iOS SDK reference](http://cocoadocs.org/docsets/BugfenderSDK/).
 
+**Note:** Xamarin Studio might highlight your code saying "The name Bugfender does not exist in the current context". This is a bug in the IDE, your code will compile fine.
 
 ### Integrating bindings on an Android project
 
