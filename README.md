@@ -67,14 +67,11 @@ public class SampleApplication : Application
 * Replace *YOUR APP KEY* with your Bugfender app key.
 * For more information, have a look at the [Android SDK reference](http://www.javadoc.io/doc/com.bugfender.sdk/android).
 
-**Note:** if using Xamarin Studio you might have 
-
-
 ## Updating
 
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
-* Android 0.5.3
+* Android 0.6.2
 * iOS 0.3.22
 
 
