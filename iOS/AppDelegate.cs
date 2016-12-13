@@ -19,7 +19,8 @@ namespace XamarinSample.iOS
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			Bugfender.EnableAllWithToken("szdGvhnVUsBYAAb8bdtnqOiWJxR4a23H");
+			Bugfender.ActivateLogger("szdGvhnVUsBYAAb8bdtnqOiWJxR4a23H");
+			Bugfender.EnableUIEventLogging();
 			Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
 
 			return true;

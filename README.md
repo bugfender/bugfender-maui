@@ -19,7 +19,8 @@ using BugfenderSDK;
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			Bugfender.EnableAllWithToken("YOUR APP KEY");
+			Bugfender.ActivateLogger("YOUR APP KEY");
+			Bugfender.EnableUIEventLogging();
 			Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
 			
 			return true;
@@ -72,7 +73,7 @@ public class SampleApplication : Application
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
 * Android 0.6.2
-* iOS 0.3.22
+* iOS 0.3.26
 
 
 ### Updating iOS
