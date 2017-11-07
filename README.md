@@ -36,8 +36,8 @@ public override bool FinishedLaunching(UIApplication application, NSDictionary l
 
 ### Integrating bindings on an Android project
 
-* Right click on *Your Solution* > **Add Existing Project...** > Select the `BugfenderBinding.Droid` project you just downloaded.
-* Right click on *Your Project* > Double click on **References** > Then add the `BugfenderBinding.Droid` project.
+* Right click on *Your Solution* > **Add Existing Project...** > Select the `BugfenderBinding.Android` project you just downloaded.
+* Right click on *Your Project* > Double click on **References** > Then add the `BugfenderBinding.Android` project.
 * If you don't have one, create a new application class by right-clicking on *Your Project* > **New File...** > **General** > **Empty Class**. Then add the following code (in this example the class is called `SampleApplication`, you can name it whatever you want):
 
 ```
@@ -92,7 +92,7 @@ Follow these steps:
 
 * Download the latest version of the [Android SDK from Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cbugfender). You need the `aar` file.
 * Rename the file to `sdk-release.aar`.
-* Replace the exising `aar` file in `BugfenderBinding.Droid/Jars` with the recently downloaded file.
+* Replace the exising `aar` file in `BugfenderBinding.Android/Jars` with the recently downloaded file.
 
 
 ## Known limitations / To Do
