@@ -6,6 +6,9 @@ In order to use Bugfender, you will need an account which you can [create here](
 
 ## Usage
 
+### Downloading this project
+You will need the files in this project, as first step you should [download it](https://github.com/bugfender/bugfender-xamarin/archive/master.zip).
+
 ### Integrating bindings on an iOS project
 
 * Right click on *Your Solution* > **Add Existing Project...** > Select the `BugfenderBinding.iOS` project you just downloaded.
@@ -89,6 +92,7 @@ Follow these steps for updating:
 Follow these steps:
 
 * Download the latest version of the [Android SDK from Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cbugfender). You need the `aar` file.
+* Rename the file to `sdk-release.aar`.
 * Replace the exising `aar` file in `BugfenderBinding.Droid/Jars` with the recently downloaded file.
 
 
