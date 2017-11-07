@@ -20,16 +20,15 @@ using BugfenderSDK;
 
 // ...
 
-		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
-		{
-			Bugfender.ActivateLogger("YOUR APP KEY");
-			Bugfender.EnableUIEventLogging();
-			Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
-			
-			return true;
-		}
-
+public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+{
+  Bugfender.ActivateLogger("YOUR APP KEY");
+  Bugfender.EnableUIEventLogging();
+  Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
+  return true;
+}
 ```
+
 * Replace *YOUR APP KEY* with your Bugfender app key.
 * For more information, have a look at the [iOS SDK reference](http://cocoadocs.org/docsets/BugfenderSDK/).
 
@@ -75,7 +74,7 @@ public class SampleApplication : Application
 
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
-* Android 0.6.2
+* Android 0.8.4
 * iOS 0.3.26
 
 

@@ -51,9 +51,29 @@
           <parameter name="message" type="java.lang.String">
           </parameter>
         </method>
+        <method abstract="false" deprecated="not deprecated" final="false" name="f" native="false" return="void" static="true" synchronized="false" visibility="public">
+          <parameter name="tag" type="java.lang.String">
+          </parameter>
+          <parameter name="message" type="java.lang.String">
+          </parameter>
+        </method>
+        <method abstract="false" deprecated="not deprecated" final="false" name="i" native="false" return="void" static="true" synchronized="false" visibility="public">
+          <parameter name="tag" type="java.lang.String">
+          </parameter>
+          <parameter name="message" type="java.lang.String">
+          </parameter>
+        </method>
+        <method abstract="false" deprecated="not deprecated" final="false" name="t" native="false" return="void" static="true" synchronized="false" visibility="public">
+          <parameter name="tag" type="java.lang.String">
+          </parameter>
+          <parameter name="message" type="java.lang.String">
+          </parameter>
+        </method>
         <method abstract="false" deprecated="not deprecated" final="false" name="forceSendOnce" native="false" return="void" static="true" synchronized="false" visibility="public">
         </method>
         <method abstract="false" deprecated="not deprecated" final="false" name="getDeviceIdentifier" native="false" return="java.lang.String" static="true" synchronized="false" visibility="public">
+        </method>
+        <method abstract="false" deprecated="not deprecated" final="false" name="getSessionIdentifier" native="false" return="java.lang.String" static="true" synchronized="false" visibility="public">
         </method>
         <method abstract="false" deprecated="not deprecated" final="false" name="log" native="false" return="void" static="true" synchronized="false" visibility="public">
           <parameter name="lineNumber" type="int">
