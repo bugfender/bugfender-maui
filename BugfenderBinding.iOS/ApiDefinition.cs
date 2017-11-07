@@ -12,15 +12,10 @@ namespace BugfenderSDK
 		[Export("activateLogger:")]
 		void ActivateLogger(string appToken);
 
-		// +(void)enableAllWithToken:(NSString *)appToken;
-		[Static]
-		[Export("enableAllWithToken:")]
-		void EnableAllWithToken(string appToken);
-
 		// +(NSString *)token;
 		[Static]
-		[Export("token")]
-		string Token { get; }
+		[Export("appKey")]
+		string AppKey { get; }
 
 		// +(NSUInteger)maximumLocalStorageSize;
 		// +(void)setMaximumLocalStorageSize:(NSUInteger)maximumLocalStorageSize;
@@ -32,6 +27,11 @@ namespace BugfenderSDK
 		[Static]
 		[Export("deviceIdentifier")]
 		string DeviceIdentifier();
+
+        // +(NSString *)deviceIdentifier;
+        [Static]
+        [Export("sessionIdentifier")]
+        string SessionIdentifier();
 
 		// +(void)setForceEnabled:(BOOL)enabled;
 		[Static]
@@ -47,11 +47,6 @@ namespace BugfenderSDK
 		[Static]
 		[Export("enableUIEventLogging")]
 		void EnableUIEventLogging();
-
-		// +(void)enableNSLogLogging;
-		[Static]
-		[Export("enableNSLogLogging")]
-		void EnableNSLogLogging();
 
 		// +(void)sendIssueWithTitle:(NSString *)title text:(NSString *)text;
 		[Static]
@@ -83,9 +78,9 @@ namespace BugfenderSDK
 		[Export("removeDeviceKey:")]
 		void RemoveDeviceKey(string key);
 
-		// +(void)logLineNumber:(NSInteger)lineNumber method:(NSString *)method file:(NSString *)file level:(BFLogLevel)level tag:(NSString *)tag message:(NSString *)message;
+		// +(void)logWithLineNumber:(NSInteger)lineNumber method:(NSString *)method file:(NSString *)file level:(BFLogLevel)level tag:(NSString *)tag message:(NSString *)message;
 		[Static]
-		[Export("logLineNumber:method:file:level:tag:message:")]
+		[Export("logWithLineNumber:method:file:level:tag:message:")]
 		void Log(nint lineNumber, string method, string file, BFLogLevel level, string tag, string message);
 
 		// +(void)forceSendOnce;
