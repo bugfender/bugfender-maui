@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>XamarinSample.Droid</RootNamespace>
     <AssemblyName>XamarinSample.Droid</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -66,13 +66,13 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BugfenderBinding.Droid\BugfenderBinding.Droid.csproj">
-      <Project>{ACC605A1-85AB-4CC8-9E4D-8ED7E3DACFD8}</Project>
-      <Name>BugfenderBinding.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XamarinSample\XamarinSample.csproj">
       <Project>{773065E0-B831-47AA-B2D9-E52C9CD8B8FC}</Project>
       <Name>XamarinSample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BugfenderBinding.Android\BugfenderBinding.Android.csproj">
+      <Project>{007C2A6D-15BF-447D-9010-8BC30298E5E8}</Project>
+      <Name>BugfenderBinding.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
