@@ -60,6 +60,7 @@ public class SampleApplication : Application
 		Bugfender.Init(this.ApplicationContext, "YOUR APP KEY", true);
 		Bugfender.EnableUIEventLogging(this);
 		Bugfender.EnableLogcatLogging();
+                Bugfender.EnableXamarinCrashReporting();
 
 		Bugfender.D("TAG", "Hello, testing!");
 		Bugfender.W("TAG", "Hello, warning!");
@@ -74,7 +75,7 @@ public class SampleApplication : Application
 
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
-* Android 0.8.4
+* Android 1.0
 * iOS 1.4.8
 
 

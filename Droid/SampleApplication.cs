@@ -17,6 +17,7 @@ public class SampleApplication : Application
 		Bugfender.Init(this.ApplicationContext, "szdGvhnVUsBYAAb8bdtnqOiWJxR4a23H", true);
 		Bugfender.EnableUIEventLogging(this);
 		Bugfender.EnableLogcatLogging();
+        Bugfender.EnableXamarinCrashReporting();
 
 		Bugfender.D("TAG", "Hello, testing!");
 		Bugfender.W("TAG", "Hello, warning!");
