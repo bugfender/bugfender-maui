@@ -56,5 +56,8 @@
   <ItemGroup>
     <LibraryProjectZip Include="Jars\sdk-release.aar" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedJar Include="Jars\classes.jar" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
 </Project>
