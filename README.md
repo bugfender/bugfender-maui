@@ -88,7 +88,7 @@ Follow these steps for updating:
 
 * Download the latest version of the [iOS SDK from GitHub](https://github.com/bugfender/BugfenderSDK-iOS).
 * Rename `BugfenderSDK.framework/BugfenderSDK` to `libBugfenderSDK.a` and copy it to `BugfenderBinding.iOS`
-* Update `BugfenderBinding.iOS/ApiDefinition.cs` by using [Objective Sharpie](https://developer.xamarin.com/guides/cross-platform/macios/binding/objective-sharpie/). Manually check which are the methods updated and merge them.
+* Update `BugfenderBinding.iOS/ApiDefinition.cs` by using [Objective Sharpie](https://developer.xamarin.com/guides/cross-platform/macios/binding/objective-sharpie/). Manually check which are the methods updated and merge them. For reference, the invocation looks something like this: `sharpie bind BugfenderSDK.framework/Headers/BugfenderSDK.h -scope BugfenderSDK.framework/Headers/ -sdk iphoneos12.1`
 
 ### Updating Android
 

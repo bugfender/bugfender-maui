@@ -23,7 +23,7 @@ namespace XamarinSample.iOS
 			Bugfender.EnableUIEventLogging();
             Bugfender.EnableXamarinCrashReporting();
 			Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
-            Bugfender.SetDeviceString("john.smith@example.com", "User"); // please note this is not very intuitive in C#, follows Cocoa conventions
+            Bugfender.SetDeviceString(key:"User", value:"john.smith@example.com"); // note we use named arguments, original method follows Cocoa conventions
 
 			return true;
 		}

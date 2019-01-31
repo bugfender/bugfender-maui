@@ -1,5 +1,6 @@
 ﻿using System;
 using Foundation;
+using UIKit;
 
 namespace BugfenderSDK
 {
@@ -7,8 +8,13 @@ namespace BugfenderSDK
 	[BaseType(typeof(NSObject))]
 	interface Bugfender
 	{
-		// +(void)activateLogger:(NSString *)appToken;
-		[Static]
+        // +(void)setApiURL:(NSURL * _Nonnull)url;
+        [Static]
+        [Export("setApiURL:")]
+        void SetApiURL(NSUrl url);
+
+        // +(void)activateLogger:(NSString *)appToken;
+        [Static]
 		[Export("activateLogger:")]
 		void ActivateLogger(string appToken);
 
@@ -43,8 +49,13 @@ namespace BugfenderSDK
 		[Export("forceEnabled")]
 		bool ForceEnabled();
 
-		// +(void)enableUIEventLogging;
-		[Static]
+        // +(BOOL)printToConsole;
+        [Static]
+        [Export("printToConsole")]
+        bool PrintToConsole();
+
+        // +(void)enableUIEventLogging;
+        [Static]
 		[Export("enableUIEventLogging")]
 		void EnableUIEventLogging();
 
@@ -53,30 +64,25 @@ namespace BugfenderSDK
         [Export("enableCrashReporting")]
         void EnableCrashReporting();
 
-		// +(void)sendIssueWithTitle:(NSString *)title text:(NSString *)text;
-		[Static]
-		[Export("sendIssueWithTitle:text:")]
-		void SendIssueWithTitle(string title, string text);
-
 		// +(void)setDeviceBOOL:(BOOL)b forKey:(NSString *)key;
 		[Static]
 		[Export("setDeviceBOOL:forKey:")]
-		void SetDeviceBOOL(bool b, string key);
+		void SetDeviceBOOL(bool value, string key);
 
 		// +(void)setDeviceString:(NSString *)s forKey:(NSString *)key;
 		[Static]
 		[Export("setDeviceString:forKey:")]
-		void SetDeviceString(string s, string key);
+		void SetDeviceString(string value, string key);
 
 		// +(void)setDeviceInteger:(UInt64)i forKey:(NSString *)key;
 		[Static]
 		[Export("setDeviceInteger:forKey:")]
-		void SetDeviceInteger(ulong i, string key);
+		void SetDeviceInteger(ulong value, string key);
 
 		// +(void)setDeviceDouble:(double)d forKey:(NSString *)key;
 		[Static]
 		[Export("setDeviceDouble:forKey:")]
-		void SetDeviceDouble(double d, string key);
+		void SetDeviceDouble(double value, string key);
 
 		// +(void)removeDeviceKey:(NSString *)key;
 		[Static]
@@ -93,5 +99,19 @@ namespace BugfenderSDK
 		[Export("forceSendOnce")]
 		void ForceSendOnce();
 
+        // +(void)sendIssueWithTitle:(NSString *)title text:(NSString *)text;
+        [Static]
+        [Export("sendIssueWithTitle:text:")]
+        void SendIssueWithTitle(string title, string text);
+
+        // +(id)userFeedbackViewControllerWithTitle:(NSString * _Nonnull)title hint:(NSString * _Nonnull)hint subjectPlaceholder:(NSString * _Nonnull)subjectPlaceholder messagePlaceholder:(NSString * _Nonnull)messagePlaceholder sendButtonTitle:(NSString * _Nonnull)sendButtonTitle cancelButtonTitle:(NSString * _Nonnull)cancelButtonTitle completion:(void (^ _Nullable)(BOOL))completionBlock;
+        [Static]
+        [Export("userFeedbackViewControllerWithTitle:hint:subjectPlaceholder:messagePlaceholder:sendButtonTitle:cancelButtonTitle:completion:")]
+        UIViewController UserFeedbackViewController(string title, string hint, string subjectPlaceholder, string messagePlaceholder, string sendButtonTitle, string cancelButtonTitle, [NullAllowed] Action<bool> completionBlock);
+
+        // +(void)sendUserFeedbackWithSubject:(NSString * _Nonnull)subject message:(NSString * _Nonnull)message;
+        [Static]
+        [Export("sendUserFeedbackWithSubject:message:")]
+        void SendUserFeedbackWithSubject(string subject, string message);
     }
 }
