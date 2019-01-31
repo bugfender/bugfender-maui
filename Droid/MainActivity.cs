@@ -1,6 +1,10 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Com.Bugfender.Sdk;
+using System;
+using Android.Content;
+using Android.Runtime;
 
 namespace XamarinSample.Droid
 {
@@ -19,9 +23,33 @@ namespace XamarinSample.Droid
 			// Get our button from the layout resource,
 			// and attach an event to it
 			Button button = FindViewById<Button>(Resource.Id.myButton);
-
 			button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
-		}
-	}
-}
 
+            Button helloBugfenderButton = FindViewById<Button>(Resource.Id.helloBugfenderButton);
+            helloBugfenderButton.Click += delegate { Bugfender.D("hello_tag", "Hello world!"); };
+
+            Button sendFeedbackButton = FindViewById<Button>(Resource.Id.sendFeedbackButton);
+            sendFeedbackButton.Click += delegate
+            {
+                var intent = Bugfender.GetUserFeedbackActivityIntent(this, "Feedback Title", "Instructions", "Subject", "Message", "Send");
+                this.StartActivityForResult(intent, Com.Bugfender.Sdk.Internal.UI.FeedbackActivity.RequestCode);
+            };
+
+            Button crashButton = FindViewById<Button>(Resource.Id.crashButton);
+            crashButton.Click += delegate { throw new Exception("test"); };
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            if(requestCode == Com.Bugfender.Sdk.Internal.UI.FeedbackActivity.RequestCode)
+            {
+                bool feedbackSent = resultCode == Result.Ok;
+                //TODO: do something with feedbackSent
+            }
+            else
+            {
+                base.OnActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+}

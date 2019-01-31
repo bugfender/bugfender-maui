@@ -33,7 +33,7 @@ namespace XamarinSample.iOS
             this.ShowViewController(vc, sender);
         }
 
-        void HandleAction(bool sent)
+        void HandleAction(bool feedbackSent)
         {
             // do something with the sent parameter
         }
