@@ -92,5 +92,6 @@ namespace BugfenderSDK
 		[Static]
 		[Export("forceSendOnce")]
 		void ForceSendOnce();
-	}
+
+    }
 }
