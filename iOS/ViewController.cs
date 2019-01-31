@@ -23,6 +23,7 @@ namespace XamarinSample.iOS
 				var title = string.Format("{0} clicks!", count++);
 				Button.SetTitle(title, UIControlState.Normal);
                 BugfenderSDK.Bugfender.WriteLine(title);
+                throw new Exception("test");
 			};
 		}
 

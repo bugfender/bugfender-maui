@@ -21,6 +21,7 @@ namespace XamarinSample.iOS
 		{
 			Bugfender.ActivateLogger("szdGvhnVUsBYAAb8bdtnqOiWJxR4a23H");
 			Bugfender.EnableUIEventLogging();
+            Bugfender.EnableXamarinCrashReporting();
 			Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
             Bugfender.SetDeviceString("User", "john.smith@example.com");
 

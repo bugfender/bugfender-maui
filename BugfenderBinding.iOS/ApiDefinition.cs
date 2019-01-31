@@ -48,6 +48,11 @@ namespace BugfenderSDK
 		[Export("enableUIEventLogging")]
 		void EnableUIEventLogging();
 
+        // +(void)enableCrashReporting;
+        [Static]
+        [Export("enableCrashReporting")]
+        void EnableCrashReporting();
+
 		// +(void)sendIssueWithTitle:(NSString *)title text:(NSString *)text;
 		[Static]
 		[Export("sendIssueWithTitle:text:")]

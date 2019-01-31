@@ -53,5 +53,17 @@ namespace BugfenderSDK
 		{
 			Bugfender.LogMessage(value.ToString());
 		}
+
+        public static void EnableXamarinCrashReporting()
+        {
+            Mono.Runtime.RemoveSignalHandlers();
+            try {
+                Bugfender.EnableCrashReporting();
+            }
+            finally
+            {
+                Mono.Runtime.InstallSignalHandlers();
+            }
+        }
 	}
 }

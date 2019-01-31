@@ -24,13 +24,16 @@ public override bool FinishedLaunching(UIApplication application, NSDictionary l
 {
   Bugfender.ActivateLogger("YOUR APP KEY");
   Bugfender.EnableUIEventLogging();
+  Bugfender.EnableXamarinCrashReporting();
   Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
   return true;
 }
 ```
 
 * Replace *YOUR APP KEY* with your Bugfender app key.
-* For more information, have a look at the [iOS SDK reference](http://cocoadocs.org/docsets/BugfenderSDK/).
+* Edit your project > Options > iOS Build > Additional mtouch arguments and add: `-cxx` to all configurations and platforms.
+* Edit your project > Options > iOS Bundle Signing > Custom Entitlements and ensure it is set to `Entitlements.plist` for all configurations and platforms.
+* For more information, have a look at the [iOS SDK reference](https://bugfender.github.io/BugfenderSDK-iOS/).
 
 **Note:** Xamarin Studio might highlight your code saying "The name Bugfender does not exist in the current context". This is a bug in the IDE, your code will compile fine.
 
