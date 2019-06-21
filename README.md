@@ -60,7 +60,7 @@ public class SampleApplication : Application
 	public override void OnCreate()
 	{
 		base.OnCreate();
-		Bugfender.Init(this.ApplicationContext, "YOUR APP KEY", true);
+		Bugfender.Init(this, "YOUR APP KEY", true);
 		Bugfender.EnableUIEventLogging(this);
 		Bugfender.EnableLogcatLogging();
                 Bugfender.EnableXamarinCrashReporting();
@@ -107,6 +107,5 @@ Xamarin integration could be better, here are a few things that can be done:
 * If using `Trace`/`Debug` to write logs in your project, you will not get those logs in Bugfender. This is because logs are supressed from the application output when compiled for Release.  The only solution to that is to call `Bugfender` class directly for logging or maybe writing a `TraceListener` class.
 * Provide a uniform interface between iOS and Android so that Bugfender can be used the same regardless of the platform. Ideally, provide a way that (platform-independent) shared projects can use it.
 * Publish as a NuGet to make integration easier.
-* Publish to Xamarin Components.
 
 If you feel like contributing in any of these areas please [contact us](https://bugfender.com/contact) or submit pull-requests and we will love you for that!
