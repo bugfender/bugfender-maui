@@ -18,6 +18,7 @@ public class SampleApplication : Application
 		Bugfender.EnableUIEventLogging(this);
 		Bugfender.EnableLogcatLogging();
         Bugfender.EnableXamarinCrashReporting();
+		Bugfender.SetMaximumLocalStorageSize(5*1024*1024); // 5MB
 
 		Bugfender.D("TAG", "Hello, testing!");
 		Bugfender.W("TAG", "Hello, warning!");
