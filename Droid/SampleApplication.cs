@@ -22,6 +22,6 @@ public class SampleApplication : Application
 
 		Bugfender.D("TAG", "Hello, testing!");
 		Bugfender.W("TAG", "Hello, warning!");
-		Bugfender.E("TAG", Bugfender.DeviceIdentifier);
+		Bugfender.E("TAG", Bugfender.DeviceUrl.ToString());
 	}
 }

@@ -12,6 +12,7 @@ namespace XamarinSample.Droid
 	public class MainActivity : Activity
 	{
 		int count = 1;
+        int FeedbackActivityRequestCode = 1337;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -32,7 +33,7 @@ namespace XamarinSample.Droid
             sendFeedbackButton.Click += delegate
             {
                 var intent = Bugfender.GetUserFeedbackActivityIntent(this, "Feedback Title", "Instructions", "Subject", "Message", "Send");
-                this.StartActivityForResult(intent, Com.Bugfender.Sdk.Internal.UI.FeedbackActivity.RequestCode);
+                this.StartActivityForResult(intent, FeedbackActivityRequestCode);
             };
 
             Button crashButton = FindViewById<Button>(Resource.Id.crashButton);
@@ -41,10 +42,11 @@ namespace XamarinSample.Droid
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
-            if(requestCode == Com.Bugfender.Sdk.Internal.UI.FeedbackActivity.RequestCode)
+            if(requestCode == FeedbackActivityRequestCode)
             {
                 bool feedbackSent = resultCode == Result.Ok;
                 //TODO: do something with feedbackSent
+                Bugfender.T("TAG", "Feedback sent: " + feedbackSent);
             }
             else
             {

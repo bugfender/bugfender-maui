@@ -13,7 +13,7 @@ namespace Com.Bugfender.Sdk
         protected static void HandleUnhandledException(object sender, RaiseThrowableEventArgs args)
         {
             Exception e = (Exception)args.Exception;
-            var id = Bugfender.SendIssue(e.Message + " (managed code exception)", "```\n" + e + "\n```");
+            var id = Bugfender.SendCrash(e.Message + " (managed code exception)", e.ToString());
             Console.WriteLine("Sending managed code exception: {0} {1}", id, e);
         }
     }
