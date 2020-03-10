@@ -45,10 +45,11 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="libBugfenderSDK.a">
-      <Kind>Static</Kind>
+    <NativeReference Include="BugfenderSDK.framework">
+      <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
       <Frameworks>SystemConfiguration Security MobileCoreServices CoreGraphics</Frameworks>
+      <IsCxx>True</IsCxx>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />

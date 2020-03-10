@@ -79,7 +79,7 @@ public class SampleApplication : Application
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
 * Android 1.1.4
-* iOS 1.6.2
+* iOS 1.8.0
 
 
 ### Updating iOS

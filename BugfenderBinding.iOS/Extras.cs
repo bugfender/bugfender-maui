@@ -83,8 +83,7 @@ namespace BugfenderSDK
             {
                 detail = "";
             }
-            detail = "```\nApp Domain, current domain exception\n\n" + detail + "\n```";
-            Bugfender.SendIssueWithTitle(title, detail);
+            Bugfender.SendCrash(title, detail);
         }
 
         private static void UnobservedTaskExceptionHandler(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
@@ -95,8 +94,7 @@ namespace BugfenderSDK
             {
                 detail = "";
             }
-            detail = "```\nTask Scheduler exception\n\n" + detail + "\n```";
-            Bugfender.SendIssueWithTitle(title, detail);
+            Bugfender.SendCrash(title, detail);
         }
 
     }

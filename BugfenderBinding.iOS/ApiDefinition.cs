@@ -13,8 +13,13 @@ namespace BugfenderSDK
         [Export("setApiURL:")]
         void SetApiURL(NSUrl url);
 
-        // +(void)activateLogger:(NSString *)appToken;
-        [Static]
+		// +(void)setBaseURL:(NSURL * _Nonnull)url;
+		[Static]
+		[Export("setBaseURL:")]
+		void SetBaseURL(NSUrl url);
+
+		// +(void)activateLogger:(NSString *)appToken;
+		[Static]
 		[Export("activateLogger:")]
 		void ActivateLogger(string appToken);
 
@@ -32,12 +37,26 @@ namespace BugfenderSDK
 		// +(NSString *)deviceIdentifier;
 		[Static]
 		[Export("deviceIdentifier")]
+		[Obsolete("Use DeviceIdentifierUrl instead")]
 		string DeviceIdentifier();
 
-        // +(NSString *)deviceIdentifier;
-        [Static]
+		// +(NSURL * _Nullable)deviceIdentifierUrl;
+		[Static]
+		[Export("deviceIdentifierUrl")]
+		[return: NullAllowed]
+		NSUrl DeviceIdentifierUrl();
+
+		// +(NSString *)deviceIdentifier;
+		[Static]
         [Export("sessionIdentifier")]
-        string SessionIdentifier();
+		[Obsolete("Use SessionIdentifierUrl instead")]
+		string SessionIdentifier();
+
+		// +(NSURL * _Nullable)sessionIdentifierUrl;
+		[Static]
+		[Export("sessionIdentifierUrl")]
+		[return: NullAllowed]
+		NSUrl SessionIdentifierUrl();
 
 		// +(void)setForceEnabled:(BOOL)enabled;
 		[Static]
@@ -49,8 +68,13 @@ namespace BugfenderSDK
 		[Export("forceEnabled")]
 		bool ForceEnabled();
 
-        // +(BOOL)printToConsole;
-        [Static]
+		// +(void)setPrintToConsole:(BOOL)enabled;
+		[Static]
+		[Export("setPrintToConsole:")]
+		void SetPrintToConsole(bool enabled);
+
+		// +(BOOL)printToConsole;
+		[Static]
         [Export("printToConsole")]
         bool PrintToConsole();
 
@@ -102,16 +126,36 @@ namespace BugfenderSDK
         // +(void)sendIssueWithTitle:(NSString *)title text:(NSString *)text;
         [Static]
         [Export("sendIssueWithTitle:text:")]
+        [Obsolete("Use SendIssueReturningUrl instead")]
         void SendIssueWithTitle(string title, string text);
 
-        // +(id)userFeedbackViewControllerWithTitle:(NSString * _Nonnull)title hint:(NSString * _Nonnull)hint subjectPlaceholder:(NSString * _Nonnull)subjectPlaceholder messagePlaceholder:(NSString * _Nonnull)messagePlaceholder sendButtonTitle:(NSString * _Nonnull)sendButtonTitle cancelButtonTitle:(NSString * _Nonnull)cancelButtonTitle completion:(void (^ _Nullable)(BOOL))completionBlock;
-        [Static]
+		// +(NSURL * _Nullable)sendIssueReturningUrlWithTitle:(NSString * _Nonnull)title text:(NSString * _Nonnull)text;
+		[Static]
+		[Export("sendIssueReturningUrlWithTitle:text:")]
+		[return: NullAllowed]
+		NSUrl SendIssueReturningUrl(string title, string markdown);
+
+		// +(NSURL * _Nullable)sendCrashWithTitle:(NSString * _Nonnull)title text:(NSString * _Nonnull)text;
+		[Static]
+		[Export("sendCrashWithTitle:text:")]
+		[return: NullAllowed]
+		NSUrl SendCrash(string title, string text);
+
+		// +(id)userFeedbackViewControllerWithTitle:(NSString * _Nonnull)title hint:(NSString * _Nonnull)hint subjectPlaceholder:(NSString * _Nonnull)subjectPlaceholder messagePlaceholder:(NSString * _Nonnull)messagePlaceholder sendButtonTitle:(NSString * _Nonnull)sendButtonTitle cancelButtonTitle:(NSString * _Nonnull)cancelButtonTitle completion:(void (^ _Nullable)(BOOL))completionBlock;
+		[Static]
         [Export("userFeedbackViewControllerWithTitle:hint:subjectPlaceholder:messagePlaceholder:sendButtonTitle:cancelButtonTitle:completion:")]
         UIViewController UserFeedbackViewController(string title, string hint, string subjectPlaceholder, string messagePlaceholder, string sendButtonTitle, string cancelButtonTitle, [NullAllowed] Action<bool> completionBlock);
 
         // +(void)sendUserFeedbackWithSubject:(NSString * _Nonnull)subject message:(NSString * _Nonnull)message;
         [Static]
         [Export("sendUserFeedbackWithSubject:message:")]
-        void SendUserFeedbackWithSubject(string subject, string message);
-    }
+        [Obsolete("Use SendUserFeedbackReturningUrl instead")]
+		void SendUserFeedbackWithSubject(string subject, string message);
+
+		// +(NSURL * _Nullable)sendUserFeedbackReturningUrlWithSubject:(NSString * _Nonnull)subject message:(NSString * _Nonnull)message;
+		[Static]
+		[Export("sendUserFeedbackReturningUrlWithSubject:message:")]
+		[return: NullAllowed]
+		NSUrl SendUserFeedbackReturningUrl(string subject, string message);
+	}
 }

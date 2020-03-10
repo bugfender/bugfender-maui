@@ -22,7 +22,7 @@ namespace XamarinSample.iOS
 			Bugfender.ActivateLogger("szdGvhnVUsBYAAb8bdtnqOiWJxR4a23H");
 			Bugfender.EnableUIEventLogging();
             Bugfender.EnableXamarinCrashReporting();
-			Bugfender.WriteLine("Bugfender ID: {0}", Bugfender.DeviceIdentifier());
+			Bugfender.WriteLine("This device in Bugfender: {0}", Bugfender.DeviceIdentifierUrl());
             Bugfender.SetDeviceString(key:"User", value:"john.smith@example.com"); // note we use named arguments, original method follows Cocoa conventions
 			Bugfender.MaximumLocalStorageSize = 5*1024*1024; // 5MB
 
