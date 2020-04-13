@@ -7,7 +7,7 @@
     <ProjectGuid>{E174AEDC-FD33-4059-A410-C5D90544453C}</ProjectGuid>
     <Description>Collect your application logs and send them to Bugfender for remote access</Description>
     <PackageId>Bugfender.Sdk</PackageId>
-    <PackageVersion>2.0.0-alpha1</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <Authors>Bugfender Team</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -52,14 +52,14 @@
       <Name>Bugfender.Sdk.Android</Name>
       <SkipGetTargetFrameworkProperties></SkipGetTargetFrameworkProperties>
       <AdditionalProperties></AdditionalProperties>
-      <ReferenceOutputAssembly></ReferenceOutputAssembly>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\Bugfender.Sdk.iOS\Bugfender.Sdk.iOS.csproj">
       <Project>{1A7DBB97-DF06-4B96-866D-CCAEA5F1FCEB}</Project>
       <Name>Bugfender.Sdk.iOS</Name>
       <SkipGetTargetFrameworkProperties></SkipGetTargetFrameworkProperties>
       <AdditionalProperties></AdditionalProperties>
-      <ReferenceOutputAssembly></ReferenceOutputAssembly>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />

@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Bugfender.Sdk</RootNamespace>
     <AssemblyName>Bugfender</AssemblyName>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
   </PropertyGroup>
