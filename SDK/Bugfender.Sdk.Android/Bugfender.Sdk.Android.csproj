@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props')" />
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84868F04-FFFE-4488-BD81-918823A40614}</ProjectGuid>
+    <ProjectGuid>{F11F6B23-DB16-4923-8456-DB7D6DBC0E82}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>Bugfender.Sdk</RootNamespace>
@@ -44,18 +44,15 @@
     <Compile Include="BugfenderBinding.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Bindings.Android\Bindings.Android.csproj">
-      <Project>{24C7C6A8-BF89-4796-A8B3-6893C5DF70E7}</Project>
+      <Project>{F31DC3D8-1E87-4643-A2CD-5F1917666DAB}</Project>
       <Name>Bindings.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.csproj">
-      <Project>{65B8CD05-3A96-4411-8543-4688A2F865F8}</Project>
-      <Name>Bugfender.Sdk.Shared</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.projitems" Label="Shared" Condition="Exists('..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
 </Project>

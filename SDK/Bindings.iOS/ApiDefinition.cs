@@ -18,12 +18,12 @@ namespace BugfenderSDK
 		[Export("setBaseURL:")]
 		void SetBaseURL(NSUrl url);
 
-		// +(void)activateLogger:(NSString *)appToken;
+		// +(void)activateLogger:(NSString * _Nonnull)appKey;
 		[Static]
 		[Export("activateLogger:")]
-		void ActivateLogger(string appToken);
+		void ActivateLogger(string appKey);
 
-		// +(NSString *)token;
+		// +(NSString * _Nullable)appKey;
 		[Static]
 		[Export("appKey")]
 		string AppKey { get; }
@@ -34,10 +34,10 @@ namespace BugfenderSDK
 		[Export("maximumLocalStorageSize")]
 		nuint MaximumLocalStorageSize { get; set; }
 
-		// +(NSString *)deviceIdentifier;
+		// +(NSString * _Nonnull)deviceIdentifier __attribute__((deprecated("Use deviceIdentifierUrl instead.")));
 		[Static]
 		[Export("deviceIdentifier")]
-		[Obsolete("Use DeviceIdentifierUrl instead")]
+		[Obsolete("Use DeviceIdentifierUrl instead.")]
 		string DeviceIdentifier();
 
 		// +(NSURL * _Nullable)deviceIdentifierUrl;
@@ -46,10 +46,11 @@ namespace BugfenderSDK
 		[return: NullAllowed]
 		NSUrl DeviceIdentifierUrl();
 
-		// +(NSString *)deviceIdentifier;
+		// +(NSString * _Nullable)sessionIdentifier __attribute__((deprecated("Use sessionIdentifierUrl instead.")));
 		[Static]
 		[Export("sessionIdentifier")]
-		[Obsolete("Use SessionIdentifierUrl instead")]
+		[Obsolete("Use SessionIdentifierUrl instead.")]
+		[return: NullAllowed]
 		string SessionIdentifier();
 
 		// +(NSURL * _Nullable)sessionIdentifierUrl;
@@ -88,52 +89,58 @@ namespace BugfenderSDK
 		[Export("enableCrashReporting")]
 		void EnableCrashReporting();
 
-		// +(void)setDeviceBOOL:(BOOL)b forKey:(NSString *)key;
+		// +(void)overrideDeviceName:(NSString * _Nonnull)deviceName;
+		[Static]
+		[Export("overrideDeviceName:")]
+		void OverrideDeviceName(string deviceName);
+
+		// +(void)setDeviceBOOL:(BOOL)b forKey:(NSString * _Nonnull)key;
 		[Static]
 		[Export("setDeviceBOOL:forKey:")]
 		void SetDeviceBOOL(bool value, string key);
 
-		// +(void)setDeviceString:(NSString *)s forKey:(NSString *)key;
+		// +(void)setDeviceString:(NSString * _Nonnull)s forKey:(NSString * _Nonnull)key;
 		[Static]
 		[Export("setDeviceString:forKey:")]
 		void SetDeviceString(string value, string key);
 
-		// +(void)setDeviceInteger:(UInt64)i forKey:(NSString *)key;
+		// +(void)setDeviceInteger:(UInt64)i forKey:(NSString * _Nonnull)key;
 		[Static]
 		[Export("setDeviceInteger:forKey:")]
 		void SetDeviceInteger(ulong value, string key);
 
-		// +(void)setDeviceDouble:(double)d forKey:(NSString *)key;
+		// +(void)setDeviceDouble:(double)d forKey:(NSString * _Nonnull)key;
 		[Static]
 		[Export("setDeviceDouble:forKey:")]
 		void SetDeviceDouble(double value, string key);
 
-		// +(void)removeDeviceKey:(NSString *)key;
+		// +(void)removeDeviceKey:(NSString * _Nonnull)key;
 		[Static]
 		[Export("removeDeviceKey:")]
 		void RemoveDeviceKey(string key);
 
-		// +(void)logWithLineNumber:(NSInteger)lineNumber method:(NSString *)method file:(NSString *)file level:(BFLogLevel)level tag:(NSString *)tag message:(NSString *)message;
+		// +(void)logWithLineNumber:(NSInteger)lineNumber method:(NSString * _Nonnull)method file:(NSString * _Nonnull)file level:(BFLogLevel)level tag:(NSString * _Nullable)tag message:(NSString * _Nonnull)message __attribute__((swift_name("log(lineNumber:method:file:level:tag:message:)")));
 		[Static]
 		[Export("logWithLineNumber:method:file:level:tag:message:")]
-		void Log(nint lineNumber, string method, string file, BFLogLevel level, string tag, string message);
+		void Log(nint lineNumber, string method, string file, BFLogLevel level, [NullAllowed] string tag, string message);
 
 		// +(void)forceSendOnce;
 		[Static]
 		[Export("forceSendOnce")]
 		void ForceSendOnce();
 
-		// +(void)sendIssueWithTitle:(NSString *)title text:(NSString *)text;
+		// +(NSString * _Nullable)sendIssueWithTitle:(NSString * _Nonnull)title text:(NSString * _Nonnull)text __attribute__((deprecated("Use sendIssueReturningUrlWithTitle:text: instead.")));
 		[Static]
 		[Export("sendIssueWithTitle:text:")]
-		[Obsolete("Use SendIssueReturningUrl instead")]
-		void SendIssueWithTitle(string title, string text);
+		[Obsolete("Use SendIssueReturningUrl instead.")]
+		[return: NullAllowed]
+		string SendIssue(string title, string text);
 
 		// +(NSURL * _Nullable)sendIssueReturningUrlWithTitle:(NSString * _Nonnull)title text:(NSString * _Nonnull)text;
 		[Static]
 		[Export("sendIssueReturningUrlWithTitle:text:")]
 		[return: NullAllowed]
-		NSUrl SendIssueReturningUrl(string title, string markdown);
+		NSUrl SendIssueReturningUrl(string title, string text);
 
 		// +(NSURL * _Nullable)sendCrashWithTitle:(NSString * _Nonnull)title text:(NSString * _Nonnull)text;
 		[Static]
@@ -141,16 +148,16 @@ namespace BugfenderSDK
 		[return: NullAllowed]
 		NSUrl SendCrash(string title, string text);
 
-		// +(id)userFeedbackViewControllerWithTitle:(NSString * _Nonnull)title hint:(NSString * _Nonnull)hint subjectPlaceholder:(NSString * _Nonnull)subjectPlaceholder messagePlaceholder:(NSString * _Nonnull)messagePlaceholder sendButtonTitle:(NSString * _Nonnull)sendButtonTitle cancelButtonTitle:(NSString * _Nonnull)cancelButtonTitle completion:(void (^ _Nullable)(BOOL))completionBlock;
+		// +(BFUserFeedbackNavigationController * _Nonnull)userFeedbackViewControllerWithTitle:(NSString * _Nonnull)title hint:(NSString * _Nonnull)hint subjectPlaceholder:(NSString * _Nonnull)subjectPlaceholder messagePlaceholder:(NSString * _Nonnull)messagePlaceholder sendButtonTitle:(NSString * _Nonnull)sendButtonTitle cancelButtonTitle:(NSString * _Nonnull)cancelButtonTitle completion:(void (^ _Nullable)(BOOL, NSURL * _Nullable))completionBlock;
 		[Static]
 		[Export("userFeedbackViewControllerWithTitle:hint:subjectPlaceholder:messagePlaceholder:sendButtonTitle:cancelButtonTitle:completion:")]
-		UIViewController UserFeedbackViewController(string title, string hint, string subjectPlaceholder, string messagePlaceholder, string sendButtonTitle, string cancelButtonTitle, [NullAllowed] Action<bool> completionBlock);
+		UIViewController UserFeedbackViewController(string title, string hint, string subjectPlaceholder, string messagePlaceholder, string sendButtonTitle, string cancelButtonTitle, [NullAllowed] Action<bool, NSUrl> completionBlock);
 
-		// +(void)sendUserFeedbackWithSubject:(NSString * _Nonnull)subject message:(NSString * _Nonnull)message;
+		// +(void)sendUserFeedbackWithSubject:(NSString * _Nonnull)subject message:(NSString * _Nonnull)message __attribute__((deprecated("Use sendUserFeedbackReturningUrlWithSubject:message: instead.")));
 		[Static]
 		[Export("sendUserFeedbackWithSubject:message:")]
-		[Obsolete("Use SendUserFeedbackReturningUrl instead")]
-		void SendUserFeedbackWithSubject(string subject, string message);
+		[Obsolete("Use SendUserFeedbackReturningUrl instead.")]
+		void SendUserFeedback(string subject, string message);
 
 		// +(NSURL * _Nullable)sendUserFeedbackReturningUrlWithSubject:(NSString * _Nonnull)subject message:(NSString * _Nonnull)message;
 		[Static]

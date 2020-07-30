@@ -4,7 +4,6 @@ using Foundation;
 
 namespace Bugfender.Sdk
 {
-
     public partial class BugfenderBinding : IBugfenderBinding
     {
         private static readonly Lazy<BugfenderBinding> lazy = new Lazy<BugfenderBinding>(() => new BugfenderBinding());
@@ -70,6 +69,11 @@ namespace Bugfender.Sdk
         public void EnableUIEventLogging()
         {
             BugfenderSDK.Bugfender.EnableUIEventLogging();
+        }
+
+        public void OverrideDeviceName(string deviceName)
+        {
+            BugfenderSDK.Bugfender.OverrideDeviceName(deviceName: deviceName);
         }
 
         public void SetDeviceString(string key, string value)

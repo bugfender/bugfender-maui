@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectTypeGuids>{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{5D382EE8-F087-4B75-A5E5-BCBF1719C084}</ProjectGuid>
+    <ProjectGuid>{0A1EC923-F45F-4FD9-A0A3-2F7C36046759}</ProjectGuid>
     <TemplateGuid>{b6f3ff35-79b2-4f25-a2fc-60a7cf61013b}</TemplateGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>NativeLibrary</RootNamespace>
@@ -47,19 +47,18 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NuGet.Build.Packaging">
-      <Version>0.2.2</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <NativeReference Include="BugfenderSDK.framework">
-      <Kind>Framework</Kind>
+    <NativeReference Include="libBugfenderSDK.a">
+      <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
       <IsCxx>True</IsCxx>
       <Frameworks>SystemConfiguration Security MobileCoreServices CoreGraphics</Frameworks>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.2.2</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

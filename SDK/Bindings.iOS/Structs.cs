@@ -1,6 +1,4 @@
-﻿using System;
-using Foundation;
-using ObjCRuntime;
+﻿using ObjCRuntime;
 
 namespace BugfenderSDK
 {

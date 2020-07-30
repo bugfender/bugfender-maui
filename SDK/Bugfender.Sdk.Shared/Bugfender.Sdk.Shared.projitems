@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{E769CDCC-23DA-4CE0-B21E-DCCE6937CDD6}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Bugfender.Sdk</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BugfenderBindingExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IBugfenderBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LogLevel.cs" />
+  </ItemGroup>
+</Project>

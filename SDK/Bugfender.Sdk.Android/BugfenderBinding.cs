@@ -4,13 +4,12 @@ using Android.Runtime;
 
 namespace Bugfender.Sdk
 {
-
-    public partial class BugfenderBinding: IBugfenderBinding
+    public partial class BugfenderBinding : IBugfenderBinding
     {
         private static readonly Lazy<BugfenderBinding> lazy = new Lazy<BugfenderBinding>(() => new BugfenderBinding());
-        
+
         public static BugfenderBinding Instance { get { return lazy.Value; } }
-        
+
         private BugfenderBinding() { }
 
         public void ActivateLogger(string appToken, bool printToConsole)
@@ -21,14 +20,14 @@ namespace Bugfender.Sdk
         public void SetApiUri(Uri uri)
         {
             Com.Bugfender.Sdk.Bugfender.SetApiUrl(uri.ToString());
-		}
+        }
 
-		public void SetBaseUri(Uri uri)
+        public void SetBaseUri(Uri uri)
         {
             Com.Bugfender.Sdk.Bugfender.SetBaseUrl(uri.ToString());
-		}
+        }
 
-		public UInt32 MaximumLocalStorageSize
+        public UInt32 MaximumLocalStorageSize
         {
             set
             {
@@ -36,8 +35,8 @@ namespace Bugfender.Sdk
             }
         }
 
-		public Uri DeviceUri
-        { 
+        public Uri DeviceUri
+        {
             get
             {
                 Java.Net.URL url = Com.Bugfender.Sdk.Bugfender.DeviceUrl;
@@ -47,7 +46,7 @@ namespace Bugfender.Sdk
             }
         }
 
-		public Uri SessionUri
+        public Uri SessionUri
         {
             get
             {
@@ -60,14 +59,20 @@ namespace Bugfender.Sdk
 
         public bool ForceEnabled
         {
-            set {
+            set
+            {
                 Com.Bugfender.Sdk.Bugfender.SetForceEnabled(value);
             }
         }
 
-		public void EnableUIEventLogging(Application application)
+        public void EnableUIEventLogging(Application application)
         {
             Com.Bugfender.Sdk.Bugfender.EnableUIEventLogging(application);
+        }
+
+        public void OverrideDeviceName(string deviceName)
+        {
+            Com.Bugfender.Sdk.Bugfender.OverrideDeviceName(deviceName);
         }
 
         public void SetDeviceString(string key, string value)
@@ -75,22 +80,22 @@ namespace Bugfender.Sdk
             Com.Bugfender.Sdk.Bugfender.SetDeviceString(key, value);
         }
 
-		public void SetDeviceInteger(string key, int value)
+        public void SetDeviceInteger(string key, int value)
         {
             Com.Bugfender.Sdk.Bugfender.SetDeviceInteger(key, new Java.Lang.Integer(value));
         }
 
-		public void SetDeviceFloat(string key, float value)
+        public void SetDeviceFloat(string key, float value)
         {
             Com.Bugfender.Sdk.Bugfender.SetDeviceFloat(key, new Java.Lang.Float(value));
         }
 
-		public void RemoveDeviceKey(string key)
+        public void RemoveDeviceKey(string key)
         {
             Com.Bugfender.Sdk.Bugfender.RemoveDeviceKey(key);
         }
 
-        public void Log(int lineNumber, String method, String file, LogLevel logLevel, String tag, String message)
+        public void Log(int lineNumber, string method, string file, LogLevel logLevel, string tag, string message)
         {
             // a negative lineNumber indicates we need to guess from the stack
             if (lineNumber < 0)
@@ -137,7 +142,7 @@ namespace Bugfender.Sdk
             Com.Bugfender.Sdk.Bugfender.ForceSendOnce();
         }
 
-		public Uri SendIssue(string title, string markdown)
+        public Uri SendIssue(string title, string markdown)
         {
             Java.Net.URL url = Com.Bugfender.Sdk.Bugfender.SendIssue(title, markdown);
             if (url == null)

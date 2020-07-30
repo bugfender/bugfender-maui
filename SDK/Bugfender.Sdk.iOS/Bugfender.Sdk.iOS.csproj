@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props')" />
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A7DBB97-DF06-4B96-866D-CCAEA5F1FCEB}</ProjectGuid>
+    <ProjectGuid>{14E601DF-CE72-452F-AA58-DB2DA19698D3}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>Bugfender.Sdk</RootNamespace>
@@ -48,18 +48,15 @@
     <Compile Include="BugfenderBinding.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Bindings.iOS\Bindings.iOS.csproj">
-      <Project>{5D382EE8-F087-4B75-A5E5-BCBF1719C084}</Project>
+      <Project>{0A1EC923-F45F-4FD9-A0A3-2F7C36046759}</Project>
       <Name>Bindings.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.csproj">
-      <Project>{65B8CD05-3A96-4411-8543-4688A2F865F8}</Project>
-      <Name>Bugfender.Sdk.Shared</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.projitems" Label="Shared" Condition="Exists('..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
 </Project>

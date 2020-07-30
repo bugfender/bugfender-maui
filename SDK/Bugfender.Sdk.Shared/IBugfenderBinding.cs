@@ -12,6 +12,7 @@ namespace Bugfender.Sdk
         Uri DeviceUri { get; }
         Uri SessionUri { get; }
         bool ForceEnabled { set; }
+        void OverrideDeviceName(string deviceName);
         void SetDeviceString(string key, string value);
         void SetDeviceInteger(string key, int value);
         void SetDeviceFloat(string key, float value);

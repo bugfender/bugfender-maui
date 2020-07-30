@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3A530C92-E330-4021-97AD-830C10961AD4}</ProjectGuid>
+    <Description>Collect your application logs and send them to Bugfender for remote access</Description>
+    <PackageId>Bugfender.Sdk</PackageId>
+    <PackageVersion>2.0.1</PackageVersion>
+    <Authors>Bugfender Team</Authors>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Bugfender.Sdk</RootNamespace>
+    <UsePartialTypes>false</UsePartialTypes>
+    <Owners>Bugfender Team</Owners>
+    <Copyright>Beenario GmbH</Copyright>
+    <PackageTags>logs log xamarin serilog nlog log4net</PackageTags>
+    <Title>Bugfender SDK for Xamarin</Title>
+    <PackageReleaseNotes>See https://dashboard.bugfender.com/release-notes</PackageReleaseNotes>
+    <Summary>Collect your application logs and send them to Bugfender for remote access</Summary>
+    <PackageProjectUrl>https://bugfender.com</PackageProjectUrl>
+    <PackageLicenseUrl>https://bugfender.com/terms-of-service</PackageLicenseUrl>
+    <AssemblyName>Bugfender.Sdk.NuGet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bugfender.Sdk.Android\Bugfender.Sdk.Android.csproj">
+      <Project>{F11F6B23-DB16-4923-8456-DB7D6DBC0E82}</Project>
+      <Name>Bugfender.Sdk.Android</Name>
+      <ReferenceSourceTarget>ProjectReference</ReferenceSourceTarget>
+    </ProjectReference>
+    <ProjectReference Include="..\Bugfender.Sdk.iOS\Bugfender.Sdk.iOS.csproj">
+      <Project>{14E601DF-CE72-452F-AA58-DB2DA19698D3}</Project>
+      <Name>Bugfender.Sdk.iOS</Name>
+      <ReferenceSourceTarget>ProjectReference</ReferenceSourceTarget>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.2.2</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.txt">
+      <IncludeInPackage>true</IncludeInPackage>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets')" />
+</Project>

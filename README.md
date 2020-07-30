@@ -116,8 +116,8 @@ The SDK is in the `SDK` folder. You can compile your own version of the NuGet by
 
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
-* Android 3.0.0
-* iOS 1.7.0
+* Android 3.0.5
+* iOS 1.9.2
 
 ### Updating iOS
 
@@ -133,3 +133,9 @@ Follow these steps:
 
 * Download the latest version of the [Android SDK from Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cbugfender). You need the `aar` file, add it to the `Binding.Android` project.
 * Update the `BugfenderBinding.cs` file if the API changed.
+
+### Testing with local sample
+
+Once a nuget has been created, you can add it to a local repo and import it from the sample application for testing:
+
+    nuget add SDK/Bugfender.Sdk.NuGetPackager/bin/Release/Bugfender.Sdk.x.x.x.nupkg -source ~/nugetrepo
