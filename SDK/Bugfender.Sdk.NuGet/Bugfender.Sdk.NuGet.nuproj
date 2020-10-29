@@ -7,7 +7,7 @@
     <ProjectGuid>{3A530C92-E330-4021-97AD-830C10961AD4}</ProjectGuid>
     <Description>Collect your application logs and send them to Bugfender for remote access</Description>
     <PackageId>Bugfender.Sdk</PackageId>
-    <PackageVersion>2.0.1</PackageVersion>
+    <PackageVersion>2.0.2</PackageVersion>
     <Authors>Bugfender Team</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
