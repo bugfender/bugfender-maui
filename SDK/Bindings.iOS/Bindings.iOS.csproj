@@ -46,6 +46,13 @@
   <ItemGroup>
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.2.2</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup>
     <NativeReference Include="libBugfenderSDK.a">
       <Kind>Static</Kind>
@@ -53,12 +60,5 @@
       <IsCxx>True</IsCxx>
       <Frameworks>SystemConfiguration Security MobileCoreServices CoreGraphics</Frameworks>
     </NativeReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
-  <ItemGroup>
-    <PackageReference Include="NuGet.Build.Packaging">
-      <Version>0.2.2</Version>
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
   </ItemGroup>
 </Project>

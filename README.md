@@ -112,18 +112,19 @@ This project is wrapping the native iOS and Android SDKs. You have the full refe
 
 This project is open source, please feel free to contribute by filing new issues or submitting push requests.
 
-The SDK is in the `SDK` folder. You can compile your own version of the NuGet by right-clicking on the Bugfender.Sdk.NuGetPackager project and selecting Create NuGet Package.
+The SDK is in the `SDK` folder. You can compile your own version of the NuGet by right-clicking on the Bugfender.Sdk.NuGet project and selecting Create NuGet Package.
 
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
-* Android 3.0.6
-* iOS 1.10.0
+* Android 3.0.8
+* iOS 1.10.1
 
 ### Updating iOS
 
 Follow these steps for updating:
 
 * Download the latest version of the [iOS SDK from GitHub](https://github.com/bugfender/BugfenderSDK-iOS) and add it to the `Binding.iOS` project.
+* Edit the `Properties/AssemblyInfo.cs` file to reflect the version.
 * Update `ApiDefinition.cs` by using [Objective Sharpie](https://developer.xamarin.com/guides/cross-platform/macios/binding/objective-sharpie/). Manually check which are the methods updated and merge them. For reference, the invocation looks something like this: `sharpie bind BugfenderSDK.framework/Headers/BugfenderSDK.h -scope BugfenderSDK.framework/Headers/ -sdk iphoneos12.1`
 * Update the `BugfenderBinding.cs` file if the API changed.
 
@@ -132,10 +133,11 @@ Follow these steps for updating:
 Follow these steps:
 
 * Download the latest version of the [Android SDK from Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cbugfender). You need the `aar` file, add it to the `Binding.Android` project.
+* Edit the `Properties/AssemblyInfo.cs` file to reflect the version.
 * Update the `BugfenderBinding.cs` file if the API changed.
 
 ### Testing with local sample
 
 Once a nuget has been created, you can add it to a local repo and import it from the sample application for testing:
 
-    nuget add SDK/Bugfender.Sdk.NuGetPackager/bin/Release/Bugfender.Sdk.x.x.x.nupkg -source ~/nugetrepo
+    nuget add SDK/Bugfender.Sdk.NuGet/bin/Release/Bugfender.Sdk.x.x.x.nupkg -source ~/nugetrepo
