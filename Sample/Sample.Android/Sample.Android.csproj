@@ -56,7 +56,7 @@
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Bugfender.Sdk">
-      <Version>2.0.3</Version>
+      <Version>2.0.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

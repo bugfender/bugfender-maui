@@ -116,8 +116,8 @@ The SDK is in the `SDK` folder. You can compile your own version of the NuGet by
 
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
-* Android 3.0.8
-* iOS 1.10.1
+* Android 3.0.9
+* iOS 1.10.2
 
 ### Updating iOS
 
