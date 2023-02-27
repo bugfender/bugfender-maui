@@ -108,6 +108,11 @@ This project is wrapping the native iOS and Android SDKs. You have the full refe
 * For more information, have a look at the [iOS SDK reference](https://bugfender.github.io/BugfenderSDK-iOS/).
 * For more information, have a look at the [Android SDK reference](http://www.javadoc.io/doc/com.bugfender.sdk/android).
 
+## Note on Xamarin.Forms
+The Bugfender Xamarin SDK can not be imported directly in .NET projects, because it's a wrapper of the iOS and Android native SDKs. Therefore, you can use the SDK in an Android application, iOS application or a "Shared" project that Xamarin creates for your convenience.
+
+Xamarin applications should have an iOS and Android project that extends from your Forms application and they should be initialized with the code above.
+
 ## Contributing
 
 This project is open source, please feel free to contribute by filing new issues or submitting push requests.
