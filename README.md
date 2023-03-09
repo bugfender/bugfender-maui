@@ -1,6 +1,6 @@
-# Bugfender SDK for Xamarin
+# Bugfender SDK for Maui
 
-Bugfender is a tool to aggregate all your mobile application logs in on a place, so you can access them remotely. This repository provides bindings for iOS and Android on Xamarin projects. Also provides a sample solution that shows the integration.
+Bugfender is a tool to aggregate all your mobile application logs in on a place, so you can access them remotely. This repository provides bindings for iOS and Android on Maui projects. Also provides a sample solution that shows the integration.
 
 In order to use Bugfender, you will need an account which you can [create here](https://bugfender.com).
 
@@ -24,7 +24,7 @@ public override bool FinishedLaunching(UIApplication application, NSDictionary l
 	BugfenderBinding bugfender = BugfenderBinding.Instance;
 	bugfender.ActivateLogger("YOUR APP KEY", true); // true == enable logging to console
 	bugfender.EnableUIEventLogging();
-	bugfender.EnableXamarinCrashReporting();
+	bugfender.EnableMauiCrashReporting();
 	bugfender.WriteLine("Logs for this device are here: {0}", bugfender.DeviceUri.ToString());
 	bugfender.Warning("TAG", "This is a warning");
 	bugfender.Error("TAG", "This is an error!");
@@ -59,7 +59,7 @@ public class SampleApplication : Application
 		BugfenderBinding bugfender = BugfenderBinding.Instance;
 		bugfender.ActivateLogger("YOUR APP KEY", true); // true == enable logging to console
 		bugfender.EnableUIEventLogging(this);
-        bugfender.EnableXamarinCrashReporting();
+        bugfender.EnableMauiCrashReporting();
 		bugfender.WriteLine("Logs for this device are here: {0}", bugfender.DeviceUri.ToString());
 		bugfender.Warning("TAG", "This is a warning");
 		bugfender.Error("TAG", "This is an error!");
@@ -73,7 +73,7 @@ public class SampleApplication : Application
 Setup:
 
  * `void ActivateLogger(string appToken, bool printToConsole)`: enables Bugfender. Call this as soon as the application is launched.
- * `void EnableXamarinCrashReporting()`: enables crash reports.
+ * `void EnableMauiCrashReporting()`: enables crash reports.
  * `UInt32 MaximumLocalStorageSize { set; }`: change the amount of storage the log cache can take on disk. The size is in bytes and can be up to 50 megabytes.
  * `Uri DeviceUri { get; }`: the device URI can be used to see the logs of this device in the Bugfender Dashboard. Useful if you want to integrate Bugfender deeper in your workflow, such as showing the Bugfender URL of a device in your help desk software.
  * `Uri SessionUri { get; }`: similar to `DeviceUri`, points to the logs of the current execution of hte app.
@@ -107,37 +107,3 @@ This project is wrapping the native iOS and Android SDKs. You have the full refe
 
 * For more information, have a look at the [iOS SDK reference](https://bugfender.github.io/BugfenderSDK-iOS/).
 * For more information, have a look at the [Android SDK reference](http://www.javadoc.io/doc/com.bugfender.sdk/android).
-
-## Contributing
-
-This project is open source, please feel free to contribute by filing new issues or submitting push requests.
-
-The SDK is in the `SDK` folder. You can compile your own version of the NuGet by right-clicking on the Bugfender.Sdk.NuGet project and selecting Create NuGet Package.
-
-This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
-
-* Android 3.0.9
-* iOS 1.10.2
-
-### Updating iOS
-
-Follow these steps for updating:
-
-* Download the latest version of the [iOS SDK from GitHub](https://github.com/bugfender/BugfenderSDK-iOS) and add it to the `Binding.iOS` project.
-* Edit the `Properties/AssemblyInfo.cs` file to reflect the version.
-* Update `ApiDefinition.cs` by using [Objective Sharpie](https://developer.xamarin.com/guides/cross-platform/macios/binding/objective-sharpie/). Manually check which are the methods updated and merge them. For reference, the invocation looks something like this: `sharpie bind BugfenderSDK.framework/Headers/BugfenderSDK.h -scope BugfenderSDK.framework/Headers/ -sdk iphoneos12.1`
-* Update the `BugfenderBinding.cs` file if the API changed.
-
-### Updating Android
-
-Follow these steps:
-
-* Download the latest version of the [Android SDK from Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cbugfender). You need the `aar` file, add it to the `Binding.Android` project.
-* Edit the `Properties/AssemblyInfo.cs` file to reflect the version.
-* Update the `BugfenderBinding.cs` file if the API changed.
-
-### Testing with local sample
-
-Once a nuget has been created, you can add it to a local repo and import it from the sample application for testing:
-
-    nuget add SDK/Bugfender.Sdk.NuGet/bin/Release/Bugfender.Sdk.x.x.x.nupkg -source ~/nugetrepo
