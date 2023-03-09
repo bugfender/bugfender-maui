@@ -59,7 +59,7 @@ public class SampleApplication : Application
 		BugfenderBinding bugfender = BugfenderBinding.Instance;
 		bugfender.ActivateLogger("YOUR APP KEY", true); // true == enable logging to console
 		bugfender.EnableUIEventLogging(this);
-        bugfender.EnableMauiCrashReporting();
+       	        bugfender.EnableMauiCrashReporting();
 		bugfender.WriteLine("Logs for this device are here: {0}", bugfender.DeviceUri.ToString());
 		bugfender.Warning("TAG", "This is a warning");
 		bugfender.Error("TAG", "This is an error!");
