@@ -1,4 +1,4 @@
-# Bugfender SDK for Maui
+# Bugfender bindings for .NET MAUI
 
 Bugfender is a tool to aggregate all your mobile application logs in on a place, so you can access them remotely. This repository provides bindings for iOS and Android on Maui projects. Also provides a sample solution that shows the integration.
 
@@ -87,9 +87,7 @@ Sending logs:
  * You can also specify a tag to easily group logs that belong to the same category, for example `Error("Networking", "Server responded with status 500")`
  * Use `void Log(int lineNumber, String method, String file, LogLevel logLevel, String tag, String message)` if you wan to provide all details for each log.
 
-**Tip:** If your project is currently `Console`/`Trace`/`Debug` to write logs, you can search & replace them to `Bugfender` to get started quickly.
-
- Custom device associated data:
+**Tip:** If your project is currently `Console`/`Trace`/`Debug` to write logs, you can search & replace them to `Bugfender` to get started quickly.Custom device-associated data:
  * `void SetDeviceString(string key, string value)`: associates data to this device so you can search for this device. You can set details like the user ID, so later on you can find the device corresponding to a user easily.
  * `void SetDeviceInteger(string key, int value)`: same for integers.
  * `void SetDeviceFloat(string key, float value)`: same for floats.
@@ -99,7 +97,7 @@ Sending logs:
 
  * `Uri SendIssue(string title, string markdown)`: send information about an exceptional situation you need to look into. This will force all logs in the current session to be sent, even if log sending is disabled.
  * `Uri SendUserFeedback(string subject, string message)`: send user feedback that will appear in the dashboard. This will force all logs in the current session to be sent, even if log sending is disabled.
- * `Uri SendCrash(string title, string text)`: manually send crash information. Usually you do not want to use this,enable automated crash reporting instead. This will force all logs in the current session to be sent, even if log sending is disabled.
+ * `Uri SendCrash(string title, string text)`: manually send crash information. Usually you do not want to use this, enable automated crash reporting instead. This will force all logs in the current session to be sent, even if log sending is disabled.
 
 ## Full reference
 

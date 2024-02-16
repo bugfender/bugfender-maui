@@ -7,7 +7,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Bugfender.Sdk.Shared", "Bug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.iOS", "Binding.iOS\Binding.iOS.csproj", "{09D93DFF-BC28-41EB-8C7B-9F8AD3346118}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Bindings.Android", "Bindings.Android\Bindings.Android.csproj", "{B26D1A3A-8AD7-453A-AD9C-062F4AE24C1C}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Binding.Android", "Binding.Android\Binding.Android.csproj", "{B26D1A3A-8AD7-453A-AD9C-062F4AE24C1C}"
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Bugfender.Sdk.Android", "Bugfender.Sdk.Android\Bugfender.Sdk.Android.csproj", "{B180A7FD-C366-4A33-8EA1-77C2BA96128F}"
 EndProject

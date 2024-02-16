@@ -7,6 +7,6 @@
   </PropertyGroup>
   <Import Project="..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.projitems" Label="Shared" />
   <ItemGroup>
-    <ProjectReference Include="..\Bindings.Android\Bindings.Android.csproj" />
+    <ProjectReference Include="..\Binding.Android\Binding.Android.csproj" />
   </ItemGroup>
 </Project>

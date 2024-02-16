@@ -39,7 +39,7 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Bindings.Android" Version="1.0.0" />
+		<PackageReference Include="Binding.Android" Version="1.0.0" />
 		<PackageReference Include="Bugfender.Sdk.Android" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
