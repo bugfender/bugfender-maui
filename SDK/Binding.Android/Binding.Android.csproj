@@ -8,4 +8,5 @@
   <ItemGroup>
     <None Remove="android-sdk.aar" />
   </ItemGroup>
+  <Import Project="..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.projitems" Label="Shared" Condition="Exists('..\Bugfender.Sdk.Shared\Bugfender.Sdk.Shared.projitems')" />
 </Project>
