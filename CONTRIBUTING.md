@@ -47,6 +47,22 @@ Follow these steps:
 
 ### Testing with local sample
 
-Once a nuget has been created, you can add it to a local repo and import it from the sample application for testing:
+Build the NuGet with:
 
-    nuget add SDK/Bugfender.Sdk.NuGet/bin/Release/Bugfender.Sdk.x.x.x.nupkg -source ~/nugetrepo
+```shell
+dotnet build --configuration Release
+nuget pack
+```
+
+Add it to a local repo and import it from the Sample application for testing:
+
+```shell
+nuget add *.nupkg -source ~/nugetrepo
+```
+
+Remove from the local repo and clean the cache:
+
+```shell
+nuget delete Bugfender.Sdk 3.x.x -source ~/nugetrepo
+nuget locals all -clear
+```

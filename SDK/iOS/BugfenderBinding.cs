@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Foundation;
-
-namespace Bugfender.Sdk
+﻿namespace Bugfender.Sdk
 {
     public partial class BugfenderBinding : IBugfenderBinding
     {
@@ -12,27 +8,34 @@ namespace Bugfender.Sdk
 
         private BugfenderBinding() { }
 
-        public void ActivateLogger(string appToken, bool printToConsole)
+        public void Init(BugfenderOptions options)
         {
-            BugfenderSDK.Bugfender.ActivateLogger(appToken);
-            BugfenderSDK.Bugfender.SetPrintToConsole(printToConsole);
-        }
-
-        public void SetApiUri(Uri uri)
-        {
-            BugfenderSDK.Bugfender.SetApiURL(NSUrl.FromString(uri.ToString()));
-        }
-
-        public void SetBaseUri(Uri uri)
-        {
-            BugfenderSDK.Bugfender.SetBaseURL(NSUrl.FromString(uri.ToString()));
-        }
-
-        public UInt32 MaximumLocalStorageSize
-        {
-            set
+            if (options.apiUri != null)
             {
-                BugfenderSDK.Bugfender.MaximumLocalStorageSize = value;
+                BugfenderSDK.Bugfender.SetApiURL(NSUrl.FromString(options.apiUri.ToString()));
+            }
+            if (options.baseUri != null)
+            {
+                BugfenderSDK.Bugfender.SetBaseURL(NSUrl.FromString(options.baseUri.ToString()));
+            }
+            BugfenderSDK.Bugfender.ActivateLogger(options.appKey);
+            if (options.maximumLocalStorageSize != null)
+            {
+                BugfenderSDK.Bugfender.MaximumLocalStorageSize = options.maximumLocalStorageSize.Value;
+            }
+            BugfenderSDK.Bugfender.SetPrintToConsole(options.printToConsole);
+            if (options.logUIEvents)
+            {
+                BugfenderSDK.Bugfender.EnableUIEventLogging();
+            }
+            if (options.nativeCrashReporting)
+            {
+                BugfenderSDK.Bugfender.EnableCrashReporting();
+            }
+            if (options.mauiCrashReporting)
+            {
+                AppDomain.CurrentDomain.UnhandledException += AppDomainExceptionHandler;
+                TaskScheduler.UnobservedTaskException += UnobservedTaskExceptionHandler;
             }
         }
 
@@ -64,16 +67,6 @@ namespace Bugfender.Sdk
             {
                 BugfenderSDK.Bugfender.SetForceEnabled(value);
             }
-        }
-
-        public void EnableUIEventLogging()
-        {
-            BugfenderSDK.Bugfender.EnableUIEventLogging();
-        }
-
-        public void OverrideDeviceName(string deviceName)
-        {
-            BugfenderSDK.Bugfender.OverrideDeviceName(deviceName: deviceName);
         }
 
         public void SetDeviceString(string key, string value)
@@ -172,22 +165,6 @@ namespace Bugfender.Sdk
             if (url == null)
                 return null;
             return new Uri(url.ToString());
-        }
-
-        public void EnableMauiCrashReporting()
-        {
-            // Besides calling EnableCrashReporting, also installs some handlers at the Mono level
-            //Mono.Runtime.RemoveSignalHandlers();
-            try
-            {
-                BugfenderSDK.Bugfender.EnableCrashReporting();
-                AppDomain.CurrentDomain.UnhandledException += BugfenderBinding.AppDomainExceptionHandler;
-                TaskScheduler.UnobservedTaskException += BugfenderBinding.UnobservedTaskExceptionHandler;
-            }
-            finally
-            {
-                //Mono.Runtime.InstallSignalHandlers();
-            }
         }
 
         private static void AppDomainExceptionHandler(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)

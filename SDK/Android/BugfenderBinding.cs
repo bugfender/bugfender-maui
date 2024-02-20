@@ -10,26 +10,32 @@ namespace Bugfender.Sdk
 
         private BugfenderBinding() { }
 
-        public void ActivateLogger(string appToken, bool printToConsole)
+        public void Init(Application app, BugfenderOptions options)
         {
-            Com.Bugfender.Sdk.Bugfender.Init(Application.Context, appToken, printToConsole);
-        }
-
-        public void SetApiUri(Uri uri)
-        {
-            Com.Bugfender.Sdk.Bugfender.SetApiUrl(uri.ToString());
-        }
-
-        public void SetBaseUri(Uri uri)
-        {
-            Com.Bugfender.Sdk.Bugfender.SetBaseUrl(uri.ToString());
-        }
-
-        public UInt32 MaximumLocalStorageSize
-        {
-            set
+            if (options.apiUri != null)
             {
-                Com.Bugfender.Sdk.Bugfender.SetMaximumLocalStorageSize(value);
+                Com.Bugfender.Sdk.Bugfender.SetApiUrl(options.apiUri.ToString());
+            }
+            if (options.baseUri != null)
+            {
+                Com.Bugfender.Sdk.Bugfender.SetBaseUrl(options.baseUri.ToString());
+            }
+            Com.Bugfender.Sdk.Bugfender.Init(Application.Context, options.appKey, options.printToConsole, false);
+            if (options.maximumLocalStorageSize != null)
+            {
+                Com.Bugfender.Sdk.Bugfender.SetMaximumLocalStorageSize(options.maximumLocalStorageSize.Value);
+            }
+            if (options.logUIEvents)
+            {
+                Com.Bugfender.Sdk.Bugfender.EnableUIEventLogging(app);
+            }
+            if (options.nativeCrashReporting)
+            {
+                Com.Bugfender.Sdk.Bugfender.EnableCrashReporting();
+            }
+            if (options.mauiCrashReporting)
+            {
+                AndroidEnvironment.UnhandledExceptionRaiser += HandleUnhandledException;
             }
         }
 
@@ -66,11 +72,6 @@ namespace Bugfender.Sdk
         public void EnableUIEventLogging(Application application)
         {
             Com.Bugfender.Sdk.Bugfender.EnableUIEventLogging(application);
-        }
-
-        public void OverrideDeviceName(string deviceName)
-        {
-            Com.Bugfender.Sdk.Bugfender.OverrideDeviceName(deviceName);
         }
 
         public void SetDeviceString(string key, string value)
@@ -169,11 +170,6 @@ namespace Bugfender.Sdk
             if (url == null)
                 return null;
             return new Uri(url.ToString());
-        }
-
-        public void EnableMauiCrashReporting()
-        {
-            AndroidEnvironment.UnhandledExceptionRaiser += HandleUnhandledException;
         }
 
         public static void HandleUnhandledException(object sender, RaiseThrowableEventArgs args)
