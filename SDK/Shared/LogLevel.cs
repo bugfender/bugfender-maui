@@ -1,4 +1,4 @@
-﻿namespace Bugfender.Sdk
+namespace Bugfender.Sdk
 {
     public enum LogLevel
     {

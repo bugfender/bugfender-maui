@@ -1,4 +1,4 @@
-﻿using Android.Runtime;
+using Android.Runtime;
 
 namespace Bugfender.Sdk
 {

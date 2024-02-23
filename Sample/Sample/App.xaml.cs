@@ -1,4 +1,4 @@
-﻿namespace Sample;
+namespace Sample;
 
 public partial class App : Application
 {
