@@ -1,6 +1,6 @@
 # Bugfender bindings for .NET MAUI
 
-Bugfender is a tool to aggregate all your mobile application logs in on a place, so you can access them remotely. This repository provides bindings for iOS and Android on Maui projects. Also provides a sample solution that shows the integration.
+Bugfender is a tool to aggregate all your mobile application logs in a single place, so you can access them remotely. This repository provides bindings for iOS and Android on MAUI projects. Also provides a sample solution that shows the integration.
 
 In order to use Bugfender, you will need an account which you can [create here](https://bugfender.com).
 
@@ -32,7 +32,9 @@ using Bugfender.Sdk;
             nativeCrashReporting = true,
             mauiCrashReporting = true,
             logUIEvents = true,
+            // maximumLocalStorageSize = 5*1024*1024,
         });
+        // some examples on how to use Bugfender
         bugfender.WriteLine("Logs for this device are here: {0}", bugfender.DeviceUri.ToString());
         bugfender.Warning("TAG", "This is a warning");
         bugfender.Error("TAG", "This is an error!");
@@ -59,10 +61,10 @@ public class MainApplication : Application
     {
     }
 
-	public override void OnCreate()
-	{
-		base.OnCreate();
-		BugfenderBinding bugfender = BugfenderBinding.Instance;
+    public override void OnCreate()
+    {
+        base.OnCreate();
+        BugfenderBinding bugfender = BugfenderBinding.Instance;
         bugfender.Init(this, new BugfenderOptions
         {
             appKey = "YOUR APP KEY",
@@ -72,11 +74,13 @@ public class MainApplication : Application
             nativeCrashReporting = true,
             mauiCrashReporting = true,
             logUIEvents = true,
+            // maximumLocalStorageSize = 5*1024*1024,
         });
-		bugfender.WriteLine("Logs for this device are here: {0}", bugfender.DeviceUri.ToString());
-		bugfender.Warning("TAG", "This is a warning");
-		bugfender.Error("TAG", "This is an error!");
-	}
+        // some examples on how to use Bugfender
+        bugfender.WriteLine("Logs for this device are here: {0}", bugfender.DeviceUri.ToString());
+        bugfender.Warning("TAG", "This is a warning");
+        bugfender.Error("TAG", "This is an error!");
+    }
 }
 ```
 * Replace *YOUR APP KEY* with your Bugfender app key.
@@ -103,7 +107,9 @@ Sending logs:
  * You can also specify a tag to easily group logs that belong to the same category, for example `Error("Networking", "Server responded with status 500")`
  * Use `void Log(int lineNumber, String method, String file, LogLevel logLevel, String tag, String message)` if you want to provide all details for each log.
 
-**Tip:** If your project is currently `Console`/`Trace`/`Debug` to write logs, you can search & replace them to `Bugfender` to get started quickly.Custom device-associated data:
+**Tip:** If your project is currently using `Console`/`Trace`/`Debug` to write logs, you can search & replace them to `Bugfender` to get started quickly.
+
+Custom device-associated data:
  * `void SetDeviceString(string key, string value)`: associates data to this device so you can search for this device. You can set details like the user ID, so later on you can find the device corresponding to a user easily.
  * `void SetDeviceInteger(string key, int value)`: same for integers.
  * `void SetDeviceFloat(string key, float value)`: same for floats.
