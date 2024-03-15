@@ -17,3 +17,5 @@ obj
 *_ReSharper.*/
 
 .vs
+
+*.nupkg

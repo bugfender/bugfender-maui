@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Bugfender.Sdk</id>
+    <version>3.0.0</version>
+    <title>Bugfender SDK for .NET MAUI</title>
+    <authors>Bugfender Team</authors>
+    <owners>Bugfender Team</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">LICENSE.txt</license>
+    <projectUrl>https://bugfender.com/</projectUrl>
+    <description>Collect your iOS and Android application logs and send them to Bugfender for remote access</description>
+    <summary>Collect your application logs and send them to Bugfender for remote access</summary>
+    <releaseNotes>See https://dashboard.bugfender.com/release-notes</releaseNotes>
+    <copyright>Beenario GmbH</copyright>
+    <language></language>
+    <tags>logs log xamarin serilog nlog log4net</tags>
+    <dependencies>
+      <group targetFramework="net7.0-android33.0" />
+      <group targetFramework="net7.0-ios16.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="../README.md" target="docs\" />
+    <file src="../LICENSE.txt" target="" />
+
+    <!-- Android -->
+    <file src="Android/bin/Release/net7.0-android/" target="lib/net7.0-android33.0" />
+
+    <!-- iOS -->
+    <file src="iOS/bin/Release/net7.0-ios/" target="lib/net7.0-ios16.1" />
+  </files>
+</package>

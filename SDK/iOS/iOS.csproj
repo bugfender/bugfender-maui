@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net7.0-ios</TargetFramework>
+        <RootNamespace>BugfenderSDK</RootNamespace>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>true</ImplicitUsings>
+        <IsBindingProject>true</IsBindingProject>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <NoBindingEmbedding>true</NoBindingEmbedding>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+        <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <NativeReference Include="BugfenderSDK.xcframework">
+        <Kind>Framework</Kind>
+        <SmartLink>False</SmartLink>
+        <ForceLoad>True</ForceLoad>
+        <Frameworks>SystemConfiguration Security MobileCoreServices CoreGraphics</Frameworks>
+        <IsCxx>True</IsCxx>
+      </NativeReference>
+    </ItemGroup>
+    <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
+</Project>
