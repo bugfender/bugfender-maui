@@ -6,6 +6,7 @@
     <title>Bugfender SDK for .NET MAUI</title>
     <authors>Bugfender Team</authors>
     <owners>Bugfender Team</owners>
+    <readme>docs\README.md</readme>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="file">LICENSE.txt</license>
     <projectUrl>https://bugfender.com/</projectUrl>
