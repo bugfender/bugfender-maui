@@ -26,7 +26,7 @@ If you open a pull request, you're granting the project maintainers the right to
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
 * Android 3.2.0
-* iOS 1.13.2
+* iOS 2.0.0
 
 ### Updating iOS
 
