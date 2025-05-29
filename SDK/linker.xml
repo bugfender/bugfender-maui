@@ -1,0 +1,13 @@
+<!-- SDK/linker.xml -->
+<linker>
+  <assembly fullname="Bugfender.Sdk">
+    <type fullname="Bugfender.Sdk.BugfenderBinding">
+      <method name="Init" />
+      <method name="Log" />
+      <method name="ForceSendOnce" />
+      <method name="SendIssue" />
+      <method name="SendCrash" />
+      <method name="SendUserFeedback" />
+    </type>
+  </assembly>
+</linker>

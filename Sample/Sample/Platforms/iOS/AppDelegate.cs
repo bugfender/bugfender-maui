@@ -14,7 +14,7 @@ public class AppDelegate : MauiUIApplicationDelegate
         BugfenderBinding bugfender = BugfenderBinding.Instance;
         bugfender.Init(new BugfenderOptions
         {
-            appKey = "YOUR APP KEY",
+            appKey = "VabTcPpzCgdXqXDFo8SmSOjx3PuJ9fB9",
             // apiUri = new Uri("https://api.bugfender.com"),
             // baseUri = new Uri("https://dashboard.bugfender.com"),
             printToConsole = true,

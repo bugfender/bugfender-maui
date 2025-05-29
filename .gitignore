@@ -19,3 +19,4 @@ obj
 .vs
 
 *.nupkg
+.net 9 tasklist.txt

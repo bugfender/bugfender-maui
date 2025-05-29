@@ -12,10 +12,19 @@ namespace Bugfender.Sdk
 
         public void Init(Application app, BugfenderOptions options)
         {
+#if NET7_0
+            // .NET 7 implementation
             if (options.apiUri != null)
             {
                 Com.Bugfender.Sdk.Bugfender.SetApiUrl(options.apiUri.ToString());
             }
+#else
+            // .NET 8/9 implementation
+            if (options.apiUri != null)
+            {
+                Com.Bugfender.Sdk.Bugfender.SetApiUrl(options.apiUri.ToString());
+            }
+#endif
             if (options.baseUri != null)
             {
                 Com.Bugfender.Sdk.Bugfender.SetBaseUrl(options.baseUri.ToString());
