@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Bugfender.Sdk;
 
 namespace Sample;
 
@@ -18,6 +19,11 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+		// Note: For Android, Bugfender initialization is done in MainApplication.cs
+		// This is the cross-platform approach using the local SDK
+		var bugfender = BugfenderBinding.Instance;
+		bugfender.Info("App started from MauiProgram");
 
 		return builder.Build();
 	}
