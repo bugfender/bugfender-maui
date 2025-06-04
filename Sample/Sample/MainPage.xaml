@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage x:Class="Sample.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sample.MainPage">
+             Title="Bugfender .NET 8 Sample">
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
 
             <Image
                 Source="dotnet_bot.png"
@@ -15,16 +13,19 @@
                 HeightRequest="200"
                 HorizontalOptions="Center" />
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+            <!-- App Info Section -->
+            <Border Stroke="#C49B61" StrokeThickness="4" Background="#2B0B98" Padding="16,8" HorizontalOptions="Center">
+                <Label x:Name="AppInfoLabel" FontSize="18" HorizontalOptions="Center" />
+            </Border>
 
+            <!-- .NET Version Info -->
+            <Border Stroke="#25D366" StrokeThickness="2" Background="#1E3A8A" Padding="12,6" HorizontalOptions="Center">
+                <Label x:Name="DotNetVersionLabel" FontSize="14" HorizontalOptions="Center" TextColor="White" />
+            </Border>
+
+            <!-- Counter Section -->
             <Label
                 Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
                 HorizontalOptions="Center" />
 
@@ -34,6 +35,51 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
+
+            <!-- Bugfender Testing Buttons -->
+            <Label 
+                Text="Bugfender SDK Test Functions"
+                FontSize="16"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,20,0,0" />
+
+            <Button
+                x:Name="TestLoggingBtn"
+                Text="Test Different Log Levels"
+                BackgroundColor="#FF6B35"
+                TextColor="White"
+                Clicked="OnTestLoggingClicked"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="TestDeviceInfoBtn"
+                Text="Set Device Information"
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                Clicked="OnTestDeviceInfoClicked"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="TestIssueBtn"
+                Text="Send Test Issue"
+                BackgroundColor="#FF9800"
+                TextColor="White"
+                Clicked="OnTestIssueClicked"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="TestCrashBtn"
+                Text="Test Crash Reporting"
+                BackgroundColor="#F44336"
+                TextColor="White"
+                Clicked="OnTestCrashClicked"
+                HorizontalOptions="Center" />
+
+            <!-- Device Info Section -->
+            <Border Stroke="#9C27B0" StrokeThickness="2" Background="#4A148C" Padding="12,8" HorizontalOptions="Center">
+                <Label x:Name="DeviceInfoLabel" FontSize="12" HorizontalOptions="Center" TextColor="White" />
+            </Border>
 
         </VerticalStackLayout>
     </ScrollView>
