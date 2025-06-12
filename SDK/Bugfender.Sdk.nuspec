@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Bugfender.Sdk</id>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <title>Bugfender SDK for .NET MAUI</title>
     <authors>Bugfender Team</authors>
     <owners>Bugfender Team</owners>
@@ -10,29 +10,36 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="file">LICENSE.txt</license>
     <projectUrl>https://bugfender.com/</projectUrl>
-    <description>Collect your iOS and Android application logs and send them to Bugfender for remote access</description>
+    <description>Collect your iOS and Android application logs and send them to Bugfender for remote access. Now with .NET 9 support!</description>
     <summary>Collect your application logs and send them to Bugfender for remote access</summary>
-    <releaseNotes>See https://dashboard.bugfender.com/release-notes</releaseNotes>
+    <releaseNotes>v3.3.0: Added .NET 9 support. Removed .NET 7 (out of support). Updated iOS minimum version to 15.0 for .NET 9. Updated Android to API 34/35.</releaseNotes>
     <copyright>Beenario GmbH</copyright>
     <language></language>
-    <tags>logs log xamarin serilog nlog log4net</tags>
+    <tags>logs log xamarin serilog nlog log4net maui net9</tags>
     <dependencies>
-      <group targetFramework="net7.0-android33.0" />
-      <group targetFramework="net7.0-ios16.1" />
-      <group targetFramework="net8.0-android33.0" />
+      <!-- .NET 8 Support -->
+      <group targetFramework="net8.0-android34.0" />
       <group targetFramework="net8.0-ios16.1" />
+      
+      <!-- .NET 9 Support -->
+      <group targetFramework="net9.0-android35.0" />
+      <group targetFramework="net9.0-ios15.0" />
     </dependencies>
   </metadata>
   <files>
     <file src="../README.md" target="docs\" />
     <file src="../LICENSE.txt" target="" />
 
-    <!-- Android -->
-    <file src="Android/bin/Release/net7.0-android/" target="lib/net7.0-android33.0" />
-    <file src="Android/bin/Release/net8.0-android/" target="lib/net8.0-android33.0" />
+    <!-- .NET 8 Android -->
+    <file src="Android/bin/Release/net8.0-android/" target="lib/net8.0-android34.0" />
 
-    <!-- iOS -->
-    <file src="iOS/bin/Release/net7.0-ios/" target="lib/net7.0-ios16.1" />
+    <!-- .NET 9 Android -->
+    <file src="Android/bin/Release/net9.0-android/" target="lib/net9.0-android35.0" />
+
+    <!-- .NET 8 iOS -->
     <file src="iOS/bin/Release/net8.0-ios/" target="lib/net8.0-ios16.1" />
+
+    <!-- .NET 9 iOS -->
+    <file src="iOS/bin/Release/net9.0-ios/" target="lib/net9.0-ios15.0" />
   </files>
 </package>

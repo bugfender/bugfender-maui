@@ -1,12 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-ios;net8.0-ios</TargetFrameworks>
+    <TargetFrameworks>net8.0-ios;net9.0-ios</TargetFrameworks>
     <RootNamespace>BugfenderSDK</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoBindingEmbedding>true</NoBindingEmbedding>
+    
+    <!-- Platform-specific minimum iOS versions -->
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-ios'">15.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">16.1</SupportedOSPlatformVersion>
   </PropertyGroup>
   
   <ItemGroup>

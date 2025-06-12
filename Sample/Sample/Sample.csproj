@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-ios;net8.0-android</TargetFrameworks>
+		<TargetFrameworks>net8.0-ios;net8.0-android;net9.0-ios;net9.0-android</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Sample</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -25,14 +25,27 @@
 		<ApplicationTitle>Sample</ApplicationTitle>
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
+		
+		<!-- Platform-specific minimum versions -->
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' And $(TargetFramework.Contains('net9'))">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' And $(TargetFramework.Contains('net8'))">16.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' And $(TargetFramework.Contains('net9'))">35</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' And $(TargetFramework.Contains('net8'))">34</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- MAUI Essential Packages -->
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Maui.Core" Version="8.0.100" />
+		<!-- .NET 9 MAUI Packages -->
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" Condition="$(TargetFramework.Contains('net9'))" />
+		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
+		
+		<!-- .NET 8 MAUI Packages -->
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" Condition="$(TargetFramework.Contains('net8'))" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" Condition="$(TargetFramework.Contains('net8'))" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" Condition="$(TargetFramework.Contains('net8'))" />
+		<PackageReference Include="Microsoft.Maui.Core" Version="8.0.100" Condition="$(TargetFramework.Contains('net8'))" />
+		
 		<PackageReference Include="Bugfender.Sdk" Version="3.1.0" />
 	</ItemGroup>
 

@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-android;net8.0-android</TargetFrameworks>
-    <SupportedOSPlatformVersion>33</SupportedOSPlatformVersion>
-    <TargetPlatformVersion>33</TargetPlatformVersion>
+    <TargetFrameworks>net8.0-android;net9.0-android</TargetFrameworks>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-android'">35</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">34</SupportedOSPlatformVersion>
+    <TargetPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-android'">35</TargetPlatformVersion>
+    <TargetPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">34</TargetPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>

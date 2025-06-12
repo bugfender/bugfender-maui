@@ -6,10 +6,15 @@ namespace Sample;
 public partial class MainPage : ContentPage
 {
 	int count = 0;
+	private string _dotNetVersion;
 
 	public MainPage()
 	{
 		InitializeComponent();
+		
+		// Get the actual .NET version once during initialization
+		_dotNetVersion = GetDotNetMajorVersion();
+		
 		var bugfender = BugfenderBinding.Instance;
 		bugfender.Info("MainPage initialized");
 		
@@ -19,9 +24,15 @@ public partial class MainPage : ContentPage
 		UpdateDeviceInfo();
 	}
 
+	private string GetDotNetMajorVersion()
+	{
+		var version = Environment.Version;
+		return $".NET {version.Major}";
+	}
+
 	private void UpdateAppInfo()
 	{
-		AppInfoLabel.Text = "🚀 Bugfender SDK .NET 8 Migration";
+		AppInfoLabel.Text = $"🚀 Bugfender SDK {_dotNetVersion} Migration";
 		AppInfoLabel.TextColor = Colors.White;
 	}
 
@@ -91,7 +102,7 @@ public partial class MainPage : ContentPage
 	{
 		var bugfender = BugfenderBinding.Instance;
 		
-		string issueTitle = "🔧 Test Issue from .NET 8 MAUI App";
+		string issueTitle = $"🔧 Test Issue from {_dotNetVersion} MAUI App";
 		string issueMarkdown = $@"# Test Issue Report
 
 ## Details
@@ -101,9 +112,10 @@ public partial class MainPage : ContentPage
 - **OS Version**: {DeviceInfo.VersionString}
 - **Button Clicks**: {count}
 - **Timestamp**: {DateTime.Now:yyyy-MM-dd HH:mm:ss}
+- **Runtime**: {_dotNetVersion}
 
 ## Description
-This is a test issue sent from the Bugfender .NET 8 MAUI sample app to verify issue reporting functionality.
+This is a test issue sent from the Bugfender {_dotNetVersion} MAUI sample app to verify issue reporting functionality.
 
 ## Steps to Reproduce
 1. Open the sample app
@@ -131,7 +143,7 @@ This is a test issue sent from the Bugfender .NET 8 MAUI sample app to verify is
 			await Task.Delay(1000);
 			
 			// Throw a test exception
-			throw new InvalidOperationException("🧪 Test crash from Bugfender .NET 8 MAUI sample app - this is intentional for testing crash reporting!");
+			throw new InvalidOperationException($"🧪 Test crash from Bugfender {_dotNetVersion} MAUI sample app - this is intentional for testing crash reporting!");
 		}
 	}
 }
