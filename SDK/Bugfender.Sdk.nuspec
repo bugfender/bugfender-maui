@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Bugfender.Sdk</id>
-    <version>3.3.0</version>
+    <version>4.0.0</version>
     <title>Bugfender SDK for .NET MAUI</title>
     <authors>Bugfender Team</authors>
     <owners>Bugfender Team</owners>
@@ -12,7 +12,7 @@
     <projectUrl>https://bugfender.com/</projectUrl>
     <description>Collect your iOS and Android application logs and send them to Bugfender for remote access. Now with .NET 9 support!</description>
     <summary>Collect your application logs and send them to Bugfender for remote access</summary>
-    <releaseNotes>v3.3.0: Added .NET 9 support. Removed .NET 7 (out of support). Updated iOS minimum version to 15.0 for .NET 9. Updated Android to API 34/35.</releaseNotes>
+    <releaseNotes>v4.0.0: Added .NET 9 support. Removed .NET 7 (out of support). Updated iOS minimum version to 15.0 for .NET 9. Updated Android to API 34/35.</releaseNotes>
     <copyright>Beenario GmbH</copyright>
     <language></language>
     <tags>logs log xamarin serilog nlog log4net maui net9</tags>
