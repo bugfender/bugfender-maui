@@ -1,12 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
+    <TargetFrameworks>net8.0-android;net9.0-android</TargetFrameworks>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-android'">35</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">34</SupportedOSPlatformVersion>
+    <TargetPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-android'">35</TargetPlatformVersion>
+    <TargetPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">34</TargetPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
+    <AndroidClassParser>class-parse</AndroidClassParser>
+    <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="android-sdk.aar" />
+  </ItemGroup>
+  <ItemGroup>
+    <LinkerPreserve Include="Com.Bugfender.Sdk.Bugfender">
+      <VisibleMembers>SetApiUrl;SetBaseUrl;Init;SetMaximumLocalStorageSize;EnableUIEventLogging;EnableCrashReporting;Log;ForceSendOnce;SendIssue;SendCrash;SendUserFeedback</VisibleMembers>
+    </LinkerPreserve>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidLibrary Include="android-sdk.aar" />
+  </ItemGroup>
+  <ItemGroup>
+    <TransformFile Include="Transforms\*.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
 </Project>
