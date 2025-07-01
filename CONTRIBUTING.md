@@ -25,8 +25,8 @@ If you open a pull request, you're granting the project maintainers the right to
 
 This repository contains the Bugfender iOS and Android SDKs, which can be updated anytime and maybe are not updated here. At the moment of writing this, the SDKs used are:
 
-* Android 3.2.0
-* iOS 2.0.0
+* Android 3.4.2
+* iOS 2.0.1
 
 ### Updating iOS
 
@@ -60,9 +60,32 @@ Add it to a local repo and import it from the Sample application for testing:
 nuget add *.nupkg -source ~/nugetrepo
 ```
 
+:::warning
+Make sure the `nugetrepo` is added as a source, you can check it with `dotnet nuget list source`. If not, add it with `dotnet nuget add source $HOME/nugetrepo`.
+
+Change the version in the `Sample/Sample.csproj` file to the new version.
+
+### Checking the version on a real device
+
+#### Android
+
+Once you have the new NuGet package, you can test it on a real device using the Sample application.
+
+```shell
+dotnet build -t:Run -f net9.0-android -p:DeviceId=<device_id>
+```
+
+If you need to find the device id, you can use the following command:
+
+```shell
+adb devices
+```
+
+### Removing the NuGet package from the local repo
+
 Remove from the local repo and clean the cache:
 
 ```shell
-nuget delete Bugfender.Sdk 3.x.x -source ~/nugetrepo
+nuget delete Bugfender.Sdk 4.x.x -source ~/nugetrepo
 nuget locals all -clear
 ```
