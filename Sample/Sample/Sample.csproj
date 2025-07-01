@@ -18,11 +18,11 @@
 		<GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
 		
 		<!-- Add these lines for bundle identifiers -->
-		<ApplicationId>com.companyname.sample</ApplicationId>
+		<ApplicationId>com.bugfender.sample.net9</ApplicationId>
 		<ApplicationIdGuid>5F9E57AA-A146-4C32-B9E9-34982C0D15D0</ApplicationIdGuid>
 		
 		<!-- iOS specific -->
-		<ApplicationTitle>Sample</ApplicationTitle>
+		<ApplicationTitle>BF Sample .NET 9</ApplicationTitle>
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 		

@@ -28,7 +28,7 @@
 		<ApplicationTitle>Sample .NET 7 Test</ApplicationTitle>
 		
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.sample.net7</ApplicationId>
+		<ApplicationId>com.bugfender.sample.net7</ApplicationId>
 		<ApplicationIdGuid>8e66a4e7-74a3-4039-96b6-ee9f32bee743</ApplicationIdGuid>
 		
 		<!-- Versions -->
