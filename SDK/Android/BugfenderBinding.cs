@@ -5,6 +5,7 @@ namespace Bugfender.Sdk
     public partial class BugfenderBinding : IBugfenderBinding
     {
         private static readonly Lazy<BugfenderBinding> lazy = new Lazy<BugfenderBinding>(() => new BugfenderBinding());
+        private static bool sdkTypeSet;
 
         public static BugfenderBinding Instance { get { return lazy.Value; } }
 
@@ -12,6 +13,7 @@ namespace Bugfender.Sdk
 
         public void Init(Application app, BugfenderOptions options)
         {
+            EnsureSdkType();
 #if NET7_0
             // .NET 7 implementation
             if (options.apiUri != null)
@@ -186,6 +188,18 @@ namespace Bugfender.Sdk
             Exception e = (Exception)args.Exception;
             var id = Com.Bugfender.Sdk.Bugfender.SendCrash(e.Message + " (managed code exception)", e.ToString());
             Console.WriteLine("Sending managed code exception: {0} {1}", id, e);
+        }
+
+        private static void EnsureSdkType()
+        {
+            if (sdkTypeSet)
+            {
+                return;
+            }
+
+            // Tag requests as coming from the MAUI binding.
+            Com.Bugfender.Sdk.Bugfender.SetSdkType("netmaui");
+            sdkTypeSet = true;
         }
     }
 }

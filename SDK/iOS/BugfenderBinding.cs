@@ -3,6 +3,8 @@ namespace Bugfender.Sdk
     public partial class BugfenderBinding : IBugfenderBinding
     {
         private static readonly Lazy<BugfenderBinding> lazy = new Lazy<BugfenderBinding>(() => new BugfenderBinding());
+        private static readonly object sdkTypeLock = new object();
+        private static bool sdkTypeSet;
 
         public static BugfenderBinding Instance { get { return lazy.Value; } }
 
@@ -10,6 +12,7 @@ namespace Bugfender.Sdk
 
         public void Init(BugfenderOptions options)
         {
+            SetSdkTypeOnce();
 #if NET7_0
             // .NET 7 implementation
             if (options.apiUri != null)
@@ -201,6 +204,26 @@ namespace Bugfender.Sdk
                 detail = "";
             }
             BugfenderSDK.Bugfender.SendCrashWithTitle(title, detail);
+        }
+
+        private static void SetSdkTypeOnce()
+        {
+            if (sdkTypeSet)
+            {
+                return;
+            }
+
+            lock (sdkTypeLock)
+            {
+                if (sdkTypeSet)
+                {
+                    return;
+                }
+
+                // Tag requests as coming from the MAUI binding.
+                BugfenderSDK.Bugfender.SetSDKType("netmaui");
+                sdkTypeSet = true;
+            }
         }
     }
 }
