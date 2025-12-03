@@ -10,6 +10,8 @@ In order to use Bugfender, you will need an account which you can [create here](
 
 Add the [**Bugfender.Sdk**](https://www.nuget.org/packages/Bugfender.Sdk) NuGet to your .NET MAUI project.
 
+The bindings set the SDK type to `netmaui` before initialization so your requests are tagged with the right user agent.
+
 ### Adding Bugfender to your iOS project
 
 * Edit your project > **Properties** > **Build** > **iOS** > **Build** and set the **Linker behavior** to **Link Frameworks SDKs Only**.
