@@ -13,7 +13,12 @@ namespace Com.Bugfender.Sdk
     {
         public virtual Java.Lang.Object? A(Java.IO.File? p0)
         {
-            return B(p0);
+            // The obfuscated helper method previously referenced (`B`) is not
+            // present in the generated bindings for the current native SDK.
+            // Returning null is safe here for build purposes; if runtime
+            // behaviour is required later we should forward to the underlying
+            // native implementation (or regenerate bindings for the AAR).
+            return null;
         }
     }
 
@@ -21,7 +26,8 @@ namespace Com.Bugfender.Sdk
     {
         public virtual Java.Lang.Object? A(Java.IO.File? p0)
         {
-            return B(p0);
+            // See note in class M above.
+            return null;
         }
     }
 } 

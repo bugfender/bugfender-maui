@@ -45,25 +45,44 @@ Follow these steps:
 * Update the `Binding.Sdk.Android/BugfenderBinding.cs` file if the API changed.
 * Update this file to reflect the version.
 
+### Building the project
+
+Go to the **SDK** folder:
+
+```shell
+cd SDK
+```
+
+To build the new project you should run:
+
+```shell
+./build.sh Release
+````
+
+If you get any error mentioning the workload needs to be restored run:
+
+```shell
+./workload.sh
+````
+
 ### Testing with local sample
 
-Build the NuGet with:
+Build the code and pack the package with:
 
 ```shell
-dotnet build --configuration Release
-nuget pack
+./build.sh
+./pack.sh
 ```
 
-Add it to a local repo and import it from the Sample application for testing:
+Add it to a local repo to later import it from the Sample application for testing:
 
 ```shell
-nuget add *.nupkg -source ~/nugetrepo
+./local-push.sh
 ```
 
-:::warning
-Make sure the `nugetrepo` is added as a source, you can check it with `dotnet nuget list source`. If not, add it with `dotnet nuget add source $HOME/nugetrepo`.
+The script will automatically check if the `nugetrepo` source exists, create the folder if needed, add the source if missing, and push the packages.
 
-Change the version in the `Sample/Sample.csproj` file to the new version.
+Now change the version in the `Sample/Sample.csproj` file to the new version.
 
 ### Checking the version on a real device
 
@@ -72,7 +91,9 @@ Change the version in the `Sample/Sample.csproj` file to the new version.
 Once you have the new NuGet package, you can test it on a real device using the Sample application.
 
 ```shell
-dotnet build -t:Run -f net9.0-android -p:DeviceId=<device_id>
+dotnet build -t:Run -f net10.0-android -p:DeviceId=<device_id>
+# or for .NET 9:
+# dotnet build -t:Run -f net9.0-android -p:DeviceId=<device_id>
 ```
 
 If you need to find the device id, you can use the following command:
