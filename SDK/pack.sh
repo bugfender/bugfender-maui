@@ -13,6 +13,10 @@ PACK_NO_BUILD="${PACK_NO_BUILD:-1}"
 
 mkdir -p "$OUT_DIR"
 
+# Always restore packages first
+echo "[pack.sh] Restoring packages..."
+dotnet restore "$ROOT_DIR/Bugfender.Sdk.csproj"
+
 if [ "$PACK_NO_BUILD" = "1" ] || [ "$PACK_NO_BUILD" = "true" ]; then
   echo "[pack.sh] Packing without building (--no-build). Ensure platform DLLs are up-to-date."
   dotnet pack "$ROOT_DIR/Bugfender.Sdk.csproj" -c "$CONFIG" -o "$OUT_DIR" --no-build
