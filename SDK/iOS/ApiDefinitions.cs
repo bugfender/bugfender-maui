@@ -112,10 +112,10 @@ namespace BugfenderSDK
 		[Export ("setBaseURL:")]
 		void SetBaseURL (NSUrl url);
 
-		// +(void)setSDKType:(NSString * _Nonnull)sdkType;
+		// +(void)setSDKType:(NSString * _Nonnull)sdkType version:(int)version;
 		[Static]
-		[Export ("setSDKType:")]
-		void SetSDKType (string sdkType);
+		[Export ("setSDKType:version:")]
+		void SetSDKType (string sdkType, int version);
 
 		// +(void)activateLogger:(NSString * _Nonnull)appKey;
 		[Static]

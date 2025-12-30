@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-ios;net8.0-android;net9.0-ios;net9.0-android</TargetFrameworks>
+		<TargetFrameworks>net10.0-ios;net10.0-android;net9.0-ios;net9.0-android</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Sample</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -18,35 +18,37 @@
 		<GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
 		
 		<!-- Add these lines for bundle identifiers -->
-		<ApplicationId>com.bugfender.sample.net9</ApplicationId>
-		<ApplicationIdGuid>5F9E57AA-A146-4C32-B9E9-34982C0D15D0</ApplicationIdGuid>
+		<ApplicationId Condition="$(TargetFramework.Contains('net10'))">com.bugfender.sample.net10</ApplicationId>
+		<ApplicationId Condition="$(TargetFramework.Contains('net9'))">com.bugfender.sample.net9</ApplicationId>
+		<ApplicationIdGuid Condition="$(TargetFramework.Contains('net10'))">6F9E57AA-A146-4C32-B9E9-34982C0D15D0</ApplicationIdGuid>
+		<ApplicationIdGuid Condition="$(TargetFramework.Contains('net9'))">5F9E57AA-A146-4C32-B9E9-34982C0D15D0</ApplicationIdGuid>
 		
 		<!-- iOS specific -->
-		<ApplicationTitle>BF Sample .NET 9</ApplicationTitle>
+		<ApplicationTitle Condition="$(TargetFramework.Contains('net10'))">BF Sample .NET 10</ApplicationTitle>
+		<ApplicationTitle Condition="$(TargetFramework.Contains('net9'))">BF Sample .NET 9</ApplicationTitle>
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 		
 		<!-- Platform-specific minimum versions -->
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' And $(TargetFramework.Contains('net10'))">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' And $(TargetFramework.Contains('net9'))">15.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' And $(TargetFramework.Contains('net8'))">16.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' And $(TargetFramework.Contains('net10'))">36</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' And $(TargetFramework.Contains('net9'))">35</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' And $(TargetFramework.Contains('net8'))">34</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<!-- .NET 10 MAUI Packages -->
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.0" Condition="$(TargetFramework.Contains('net10'))" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.0" Condition="$(TargetFramework.Contains('net10'))" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" Condition="$(TargetFramework.Contains('net10'))" />
+		<PackageReference Include="Microsoft.Maui.Core" Version="10.0.0" Condition="$(TargetFramework.Contains('net10'))" />
 		<!-- .NET 9 MAUI Packages -->
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" Condition="$(TargetFramework.Contains('net9'))" />
 		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
-		
-		<!-- .NET 8 MAUI Packages -->
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" Condition="$(TargetFramework.Contains('net8'))" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" Condition="$(TargetFramework.Contains('net8'))" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" Condition="$(TargetFramework.Contains('net8'))" />
-		<PackageReference Include="Microsoft.Maui.Core" Version="8.0.100" Condition="$(TargetFramework.Contains('net8'))" />
-		
-		<PackageReference Include="Bugfender.Sdk" Version="4.1.0" />
+				
+		<PackageReference Include="Bugfender.Sdk" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -18,7 +18,7 @@ namespace Sample
             BugfenderBinding bugfender = BugfenderBinding.Instance;
             bugfender.Init(this, new BugfenderOptions
             {
-                appKey = "VabTcPpzCgdXqXDFo8SmSOjx3PuJ9fB9",
+                appKey = "OBoVNRALf2LoSSe6QhLSpiptIBtGcCxq",
                 printToConsole = true,
                 nativeCrashReporting = true,
                 mauiCrashReporting = true,

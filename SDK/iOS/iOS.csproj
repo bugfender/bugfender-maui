@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0-ios;net9.0-ios</TargetFrameworks>
+    <TargetFrameworks>net10.0-ios;net9.0-ios</TargetFrameworks>
     <RootNamespace>BugfenderSDK</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
@@ -9,6 +9,7 @@
     <NoBindingEmbedding>true</NoBindingEmbedding>
     
     <!-- Platform-specific minimum iOS versions -->
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net10.0-ios'">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-ios'">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">16.1</SupportedOSPlatformVersion>
   </PropertyGroup>
@@ -30,7 +31,7 @@
   
   <ItemGroup>
     <LinkerPreserve Include="BugfenderSDK.Bugfender">
-      <VisibleMembers>SetApiURL;SetBaseURL;ActivateLogger;SetMaximumLocalStorageSize;EnableUIEventLogging;EnableCrashReporting;LogWithLineNumber;ForceSendOnce;SendIssueReturningUrlWithTitle;SendCrashWithTitle;SendUserFeedbackReturningUrlWithSubject</VisibleMembers>
+      <VisibleMembers>SetApiURL;SetBaseURL;SetSDKType;ActivateLogger;SetMaximumLocalStorageSize;EnableUIEventLogging;EnableCrashReporting;LogWithLineNumber;ForceSendOnce;SendIssueReturningUrlWithTitle;SendCrashWithTitle;SendUserFeedbackReturningUrlWithSubject</VisibleMembers>
     </LinkerPreserve>
   </ItemGroup>
   
