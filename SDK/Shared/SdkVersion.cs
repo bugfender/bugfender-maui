@@ -7,9 +7,9 @@ namespace Bugfender.Sdk
     public static class SdkVersion
     {
         /// <summary>
-        /// The MAUI SDK version as an integer (e.g., 5 for version 5.0.0)
+        /// The MAUI SDK version as an integer (e.g., 20251230 for version 5.0.0)
         /// </summary>
-        public const int Version = 5;
+        public const int Version = 20251230;
     }
 }
 

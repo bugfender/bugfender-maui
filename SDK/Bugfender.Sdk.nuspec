@@ -12,7 +12,7 @@
     <projectUrl>https://bugfender.com/</projectUrl>
     <description>Collect your iOS and Android application logs and send them to Bugfender for remote access. Now with .NET 10 and .NET 9 support and Bugfender SDK 3.6.0/2.2.0.</description>
     <summary>Collect your application logs and send them to Bugfender for remote access</summary>
-    <releaseNotes>v4.1.0: Updated bundled Bugfender native SDKs to Android 3.6.0 and iOS 2.2.0, including SDK type tagging for MAUI bindings.</releaseNotes>
+    <releaseNotes>v5.0.0: Updated bundled Bugfender native SDKs to Android 3.6.0 and iOS 2.2.0, including SDK type tagging for MAUI bindings and API URI support.</releaseNotes>
     <copyright>Beenario GmbH</copyright>
     <language></language>
     <tags>logs log xamarin serilog nlog log4net maui net10 net9</tags>
