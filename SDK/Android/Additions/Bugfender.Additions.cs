@@ -5,10 +5,10 @@ namespace Com.Bugfender.Sdk
 {
     public partial class Bugfender
     {
-        [Register("setSDKType", "(Ljava/lang/String; I)V", "")]
+        [Register("setSDKType", "(Ljava/lang/String;I)V", "")]
         internal static unsafe void SetSdkType(string sdkType, int version)
         {
-            const string __id = "setSDKType.(Ljava/lang/String; I)V";
+            const string __id = "setSDKType.(Ljava/lang/String;I)V";
             var nativeSdkType = JNIEnv.NewString(sdkType);
             try
             {

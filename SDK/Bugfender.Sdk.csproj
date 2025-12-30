@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <PackageId>Bugfender.Sdk</PackageId>
-    <Version>4.1.0</Version>
+    <Version>5.0.0</Version>
     <Title>Bugfender SDK for .NET MAUI</Title>
     <Authors>Bugfender Team</Authors>
     <Owners>Bugfender Team</Owners>
