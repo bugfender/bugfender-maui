@@ -14,8 +14,8 @@ namespace Bugfender.Sdk
 
     public interface IBugfenderBinding
     {
-        Uri DeviceUri { get; }
-        Uri SessionUri { get; }
+        Uri? DeviceUri { get; }
+        Uri? SessionUri { get; }
         bool ForceEnabled { set; }
         void SetDeviceString(string key, string value);
         void SetDeviceInteger(string key, int value);
@@ -23,8 +23,8 @@ namespace Bugfender.Sdk
         void RemoveDeviceKey(string key);
         void Log(int lineNumber, string method, string file, LogLevel logLevel, string tag, string message);
         void ForceSendOnce();
-        Uri SendIssue(string title, string markdown);
-        Uri SendCrash(string title, string text);
-        Uri SendUserFeedback(string subject, string message);
+        Uri? SendIssue(string title, string markdown);
+        Uri? SendCrash(string title, string text);
+        Uri? SendUserFeedback(string subject, string message);
     }
 }

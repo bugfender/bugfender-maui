@@ -50,25 +50,31 @@ namespace Bugfender.Sdk
             }
         }
 
-        public Uri DeviceUri
+        public Uri? DeviceUri
         {
             get
             {
-                Java.Net.URL url = Com.Bugfender.Sdk.Bugfender.DeviceUrl;
+                Java.Net.URL? url = Com.Bugfender.Sdk.Bugfender.DeviceUrl;
                 if (url == null)
                     return null;
-                return new Uri(url.ToString());
+                string? urlString = url.ToString();
+                if (urlString == null)
+                    return null;
+                return new Uri(urlString);
             }
         }
 
-        public Uri SessionUri
+        public Uri? SessionUri
         {
             get
             {
-                Java.Net.URL url = Com.Bugfender.Sdk.Bugfender.SessionUrl;
+                Java.Net.URL? url = Com.Bugfender.Sdk.Bugfender.SessionUrl;
                 if (url == null)
                     return null;
-                return new Uri(url.ToString());
+                string? urlString = url.ToString();
+                if (urlString == null)
+                    return null;
+                return new Uri(urlString);
             }
         }
 
@@ -92,12 +98,12 @@ namespace Bugfender.Sdk
 
         public void SetDeviceInteger(string key, int value)
         {
-            Com.Bugfender.Sdk.Bugfender.SetDeviceInteger(key, new Java.Lang.Integer(value));
+            Com.Bugfender.Sdk.Bugfender.SetDeviceInteger(key, Java.Lang.Integer.ValueOf(value));
         }
 
         public void SetDeviceFloat(string key, float value)
         {
-            Com.Bugfender.Sdk.Bugfender.SetDeviceFloat(key, new Java.Lang.Float(value));
+            Com.Bugfender.Sdk.Bugfender.SetDeviceFloat(key, Java.Lang.Float.ValueOf(value));
         }
 
         public void RemoveDeviceKey(string key)
@@ -110,17 +116,23 @@ namespace Bugfender.Sdk
             // a negative lineNumber indicates we need to guess from the stack
             if (lineNumber < 0)
             {
-                System.Diagnostics.StackFrame frame = new System.Diagnostics.StackTrace(true).GetFrame(2);
-                if (frame.GetType().Namespace.StartsWith("Com.Bugfender"))
+                System.Diagnostics.StackFrame? frame = new System.Diagnostics.StackTrace(true).GetFrame(2);
+                if (frame != null && frame.GetType().Namespace?.StartsWith("Com.Bugfender") == true)
                 {
                     frame = new System.Diagnostics.StackTrace(true).GetFrame(3);
                 }
 
-                lineNumber = frame.GetFileLineNumber();
-                method = frame.GetMethod().Name;
-                file = System.IO.Path.GetFileName(frame.GetFileName());
-                if (method == null) method = "";
-                if (file == null) file = "";
+                if (frame != null)
+                {
+                    lineNumber = frame.GetFileLineNumber();
+                    method = frame.GetMethod()?.Name ?? "";
+                    file = System.IO.Path.GetFileName(frame.GetFileName() ?? "");
+                }
+                else
+                {
+                    method = "";
+                    file = "";
+                }
             }
 
             Com.Bugfender.Sdk.Bugfender.Log(lineNumber, method, file, MapLoglLevelToSdkLogLevel(logLevel), tag, message);
@@ -128,23 +140,18 @@ namespace Bugfender.Sdk
 
         private static Com.Bugfender.Sdk.LogLevel MapLoglLevelToSdkLogLevel(LogLevel logLevel)
         {
-            switch (logLevel)
+#pragma warning disable CS8603 // Enum values are never null, but compiler doesn't recognize this
+            return logLevel switch
             {
-                case LogLevel.Fatal:
-                    return Com.Bugfender.Sdk.LogLevel.Fatal;
-                case LogLevel.Error:
-                    return Com.Bugfender.Sdk.LogLevel.Error;
-                case LogLevel.Warning:
-                    return Com.Bugfender.Sdk.LogLevel.Warning;
-                case LogLevel.Info:
-                    return Com.Bugfender.Sdk.LogLevel.Info;
-                case LogLevel.Debug:
-                    return Com.Bugfender.Sdk.LogLevel.Debug;
-                case LogLevel.Trace:
-                    return Com.Bugfender.Sdk.LogLevel.Trace;
-                default:
-                    return Com.Bugfender.Sdk.LogLevel.Info;
-            }
+                LogLevel.Fatal => Com.Bugfender.Sdk.LogLevel.Fatal,
+                LogLevel.Error => Com.Bugfender.Sdk.LogLevel.Error,
+                LogLevel.Warning => Com.Bugfender.Sdk.LogLevel.Warning,
+                LogLevel.Info => Com.Bugfender.Sdk.LogLevel.Info,
+                LogLevel.Debug => Com.Bugfender.Sdk.LogLevel.Debug,
+                LogLevel.Trace => Com.Bugfender.Sdk.LogLevel.Trace,
+                _ => Com.Bugfender.Sdk.LogLevel.Info
+            };
+#pragma warning restore CS8603
         }
 
         public void ForceSendOnce()
@@ -152,20 +159,26 @@ namespace Bugfender.Sdk
             Com.Bugfender.Sdk.Bugfender.ForceSendOnce();
         }
 
-        public Uri SendIssue(string title, string markdown)
+        public Uri? SendIssue(string title, string markdown)
         {
-            Java.Net.URL url = Com.Bugfender.Sdk.Bugfender.SendIssue(title, markdown);
+            Java.Net.URL? url = Com.Bugfender.Sdk.Bugfender.SendIssue(title, markdown);
             if (url == null)
                 return null;
-            return new Uri(url.ToString());
+            string? urlString = url.ToString();
+            if (urlString == null)
+                return null;
+            return new Uri(urlString);
         }
 
-        public Uri SendCrash(string title, string text)
+        public Uri? SendCrash(string title, string text)
         {
-            Java.Net.URL url = Com.Bugfender.Sdk.Bugfender.SendCrash(title, text);
+            Java.Net.URL? url = Com.Bugfender.Sdk.Bugfender.SendCrash(title, text);
             if (url == null)
                 return null;
-            return new Uri(url.ToString());
+            string? urlString = url.ToString();
+            if (urlString == null)
+                return null;
+            return new Uri(urlString);
         }
 
         /* TODO
@@ -175,15 +188,18 @@ namespace Bugfender.Sdk
             this.StartActivityForResult(intent, FeedbackActivityRequestCode);
         }*/
 
-        public Uri SendUserFeedback(string subject, string message)
+        public Uri? SendUserFeedback(string subject, string message)
         {
-            Java.Net.URL url = Com.Bugfender.Sdk.Bugfender.SendUserFeedback(subject, message);
+            Java.Net.URL? url = Com.Bugfender.Sdk.Bugfender.SendUserFeedback(subject, message);
             if (url == null)
                 return null;
-            return new Uri(url.ToString());
+            string? urlString = url.ToString();
+            if (urlString == null)
+                return null;
+            return new Uri(urlString);
         }
 
-        public static void HandleUnhandledException(object sender, RaiseThrowableEventArgs args)
+        public static void HandleUnhandledException(object? sender, RaiseThrowableEventArgs args)
         {
             Exception e = (Exception)args.Exception;
             var id = Com.Bugfender.Sdk.Bugfender.SendCrash(e.Message + " (managed code exception)", e.ToString());

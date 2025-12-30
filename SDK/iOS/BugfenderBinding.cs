@@ -17,18 +17,30 @@ namespace Bugfender.Sdk
             // .NET 7 implementation
             if (options.apiUri != null)
             {
-                BugfenderSDK.Bugfender.SetApiURL(NSUrl.FromString(options.apiUri.ToString()));
+                NSUrl? url = NSUrl.FromString(options.apiUri.ToString());
+                if (url != null)
+                {
+                    BugfenderSDK.Bugfender.SetApiURL(url);
+                }
             }
 #else
-            // .NET 8/9 implementation
+            // .NET 8/9/10 implementation
             if (options.apiUri != null)
             {
-                BugfenderSDK.Bugfender.SetApiURL(NSUrl.FromString(options.apiUri.ToString()));
+                NSUrl? url = NSUrl.FromString(options.apiUri.ToString());
+                if (url != null)
+                {
+                    BugfenderSDK.Bugfender.SetApiURL(url);
+                }
             }
 #endif
             if (options.baseUri != null)
             {
-                BugfenderSDK.Bugfender.SetBaseURL(NSUrl.FromString(options.baseUri.ToString()));
+                NSUrl? url = NSUrl.FromString(options.baseUri.ToString());
+                if (url != null)
+                {
+                    BugfenderSDK.Bugfender.SetBaseURL(url);
+                }
             }
             BugfenderSDK.Bugfender.ActivateLogger(options.appKey);
             if (options.maximumLocalStorageSize != null)
@@ -51,25 +63,31 @@ namespace Bugfender.Sdk
             }
         }
 
-        public Uri DeviceUri
+        public Uri? DeviceUri
         {
             get
             {
-                NSUrl url = BugfenderSDK.Bugfender.DeviceIdentifierUrl();
+                NSUrl? url = BugfenderSDK.Bugfender.DeviceIdentifierUrl();
                 if (url == null)
                     return null;
-                return new Uri(url.ToString());
+                string? urlString = url.ToString();
+                if (urlString == null)
+                    return null;
+                return new Uri(urlString);
             }
         }
 
-        public Uri SessionUri
+        public Uri? SessionUri
         {
             get
             {
-                NSUrl url = BugfenderSDK.Bugfender.SessionIdentifierUrl();
+                NSUrl? url = BugfenderSDK.Bugfender.SessionIdentifierUrl();
                 if (url == null)
                     return null;
-                return new Uri(url.ToString());
+                string? urlString = url.ToString();
+                if (urlString == null)
+                    return null;
+                return new Uri(urlString);
             }
         }
 
@@ -106,17 +124,25 @@ namespace Bugfender.Sdk
             // a negative lineNumber indicates we need to guess from the stack
             if (lineNumber < 0)
             {
-                System.Diagnostics.StackFrame frame = new System.Diagnostics.StackTrace(true).GetFrame(2);
-                if (frame.GetType().Namespace.StartsWith("Com.Bugfender"))
+                System.Diagnostics.StackFrame? frame = new System.Diagnostics.StackTrace(true).GetFrame(2);
+                if (frame != null && frame.GetType().Namespace?.StartsWith("Com.Bugfender") == true)
                 {
                     frame = new System.Diagnostics.StackTrace(true).GetFrame(3);
                 }
 
-                lineNumber = frame.GetFileLineNumber();
-                method = frame.GetMethod().Name;
-                file = System.IO.Path.GetFileName(frame.GetFileName());
-                if (method == null) method = "";
-                if (file == null) file = "";
+                if (frame != null)
+                {
+                    lineNumber = frame.GetFileLineNumber();
+#pragma warning disable IL2026 // Suppress trimming warning - GetMethod() is needed for stack trace logging
+                    method = frame.GetMethod()?.Name ?? "";
+#pragma warning restore IL2026
+                    file = System.IO.Path.GetFileName(frame.GetFileName() ?? "");
+                }
+                else
+                {
+                    method = "";
+                    file = "";
+                }
             }
 
             BugfenderSDK.Bugfender.LogWithLineNumber(lineNumber, method, file, MapLoglLevelToBFLogLevel(logLevel), tag, message);
@@ -148,20 +174,26 @@ namespace Bugfender.Sdk
             BugfenderSDK.Bugfender.ForceSendOnce();
         }
 
-        public Uri SendIssue(string title, string markdown)
+        public Uri? SendIssue(string title, string markdown)
         {
-            NSUrl url = BugfenderSDK.Bugfender.SendIssueReturningUrlWithTitle(title, markdown);
+            NSUrl? url = BugfenderSDK.Bugfender.SendIssueReturningUrlWithTitle(title, markdown);
             if (url == null)
                 return null;
-            return new Uri(url.ToString());
+            string? urlString = url.ToString();
+            if (urlString == null)
+                return null;
+            return new Uri(urlString);
         }
 
-        public Uri SendCrash(string title, string text)
+        public Uri? SendCrash(string title, string text)
         {
-            NSUrl url = BugfenderSDK.Bugfender.SendCrashWithTitle(title, text);
+            NSUrl? url = BugfenderSDK.Bugfender.SendCrashWithTitle(title, text);
             if (url == null)
                 return null;
-            return new Uri(url.ToString());
+            string? urlString = url.ToString();
+            if (urlString == null)
+                return null;
+            return new Uri(urlString);
         }
 
         /* TODO
@@ -171,31 +203,33 @@ namespace Bugfender.Sdk
             this.StartActivityForResult(intent, FeedbackActivityRequestCode);
         }*/
 
-        public Uri SendUserFeedback(string subject, string message)
+        public Uri? SendUserFeedback(string subject, string message)
         {
-            NSUrl url = BugfenderSDK.Bugfender.SendUserFeedbackReturningUrlWithSubject(subject, message);
+            NSUrl? url = BugfenderSDK.Bugfender.SendUserFeedbackReturningUrlWithSubject(subject, message);
             if (url == null)
                 return null;
-            return new Uri(url.ToString());
+            string? urlString = url.ToString();
+            if (urlString == null)
+                return null;
+            return new Uri(urlString);
         }
 
-        private static void AppDomainExceptionHandler(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        private static void AppDomainExceptionHandler(object? sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
         {
             var e = unhandledExceptionEventArgs.ExceptionObject as Exception;
+            if (e == null)
+                return;
+            
             var title = e.Message;
             if (title == null)
             {
                 title = e.ToString();
             }
-            var detail = e.StackTrace;
-            if (detail == null)
-            {
-                detail = "";
-            }
+            var detail = e.StackTrace ?? "";
             BugfenderSDK.Bugfender.SendCrashWithTitle(title, detail);
         }
 
-        private static void UnobservedTaskExceptionHandler(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
+        private static void UnobservedTaskExceptionHandler(object? sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
         {
             var title = unobservedTaskExceptionEventArgs.Exception.ToString();
             var detail = unobservedTaskExceptionEventArgs.Exception.StackTrace;

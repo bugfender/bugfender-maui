@@ -64,7 +64,7 @@ namespace Bugfender.Sdk
 
         public static void WriteLine(this IBugfenderBinding bf, ValueType value)
         {
-            bf.Log(-1, "", "", LogLevel.Info, "", value.ToString());
+            bf.Log(-1, "", "", LogLevel.Info, "", value.ToString() ?? "");
         }
 
         public static void WriteLine(this IBugfenderBinding bf)
@@ -90,7 +90,7 @@ namespace Bugfender.Sdk
 
         public static void WriteLine(this IBugfenderBinding bf, object value)
         {
-            bf.Log(-1, "", "", LogLevel.Info, "", value.ToString());
+            bf.Log(-1, "", "", LogLevel.Info, "", value?.ToString() ?? "");
         }
     }
 }

@@ -15,6 +15,8 @@
     <Copyright>Beenario GmbH</Copyright>
     <PackageTags>logs log xamarin serilog nlog log4net maui net10 net9</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <!-- Suppress NU5123 warnings about long file paths in xcframework - these are native framework files we can't rename -->
+    <NoWarn>$(NoWarn);NU5123</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
