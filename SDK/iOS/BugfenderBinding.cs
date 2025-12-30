@@ -221,7 +221,7 @@ namespace Bugfender.Sdk
                 }
 
                 // Tag requests as coming from the MAUI binding.
-                BugfenderSDK.Bugfender.SetSDKType("netmaui");
+                BugfenderSDK.Bugfender.SetSDKType("netmaui", SdkVersion.Version);
                 sdkTypeSet = true;
             }
         }
