@@ -15,8 +15,10 @@
     <Copyright>Beenario GmbH</Copyright>
     <PackageTags>logs log xamarin serilog nlog log4net maui net10 net9</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <!-- Suppress NU5123 warnings about long file paths in xcframework - these are native framework files we can't rename -->
-    <NoWarn>$(NoWarn);NU5123</NoWarn>
+    <!-- Suppress NuGet package warnings:
+         NU5123: Long file paths in xcframework - these are native framework files we can't rename
+         NU5128/NU5130: Dependency group mismatches - intentional for platform-specific packages -->
+    <NoWarn>$(NoWarn);NU5123;NU5128;NU5130</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
