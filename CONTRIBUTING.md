@@ -102,6 +102,40 @@ If you need to find the device id, you can use the following command:
 adb devices
 ```
 
+#### iOS
+
+Once you have the new NuGet package, you can test it on an iOS simulator or device using the Sample application.
+
+**On iOS Simulator:**
+
+```shell
+dotnet build -t:Run -f net10.0-ios
+# or for .NET 9:
+# dotnet build -t:Run -f net9.0-ios
+```
+
+This will automatically launch the default simulator. To specify a particular simulator:
+
+```shell
+dotnet build -t:Run -f net10.0-ios -p:_DeviceName=:v2:udid=<simulator_udid>
+```
+
+**On iOS Device:**
+
+```shell
+dotnet build -t:Run -f net10.0-ios -p:_DeviceName=:v2:udid=<device_udid>
+# or for .NET 9:
+# dotnet build -t:Run -f net9.0-ios -p:_DeviceName=:v2:udid=<device_udid>
+```
+
+To find available simulators and devices, you can use:
+
+```shell
+xcrun xctrace list devices
+```
+
+This will list all available iOS simulators and connected devices with their UDIDs.
+
 ### Removing the NuGet package from the local repo
 
 Remove from the local repo and clean the cache:
