@@ -1,11 +1,19 @@
 <Project>
   <!-- Android: Include AAR -->
   <Target Name="_BugfenderSdkIncludeAar" BeforeTargets="ResolveLibraryProjectImports" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <PropertyGroup>
+      <_BugfenderAarPath></_BugfenderAarPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="Exists('$(MSBuildThisFileDirectory)..\jar\android-sdk.aar')">
+      <_BugfenderAarPath>$(MSBuildThisFileDirectory)..\jar\android-sdk.aar</_BugfenderAarPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(_BugfenderAarPath)' == '' And $(TargetFramework.Contains('net10')) And Exists('$(MSBuildThisFileDirectory)..\lib\net10.0-android36.0\android-sdk.aar')">
+      <_BugfenderAarPath>$(MSBuildThisFileDirectory)..\lib\net10.0-android36.0\android-sdk.aar</_BugfenderAarPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(_BugfenderAarPath)' == '' And $(TargetFramework.Contains('net9')) And Exists('$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-sdk.aar')">
+      <_BugfenderAarPath>$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-sdk.aar</_BugfenderAarPath>
+    </PropertyGroup>
     <ItemGroup>
-      <!-- Include AAR from jar folder (preferred) or lib folder -->
-      <_BugfenderAarPath Condition="Exists('$(MSBuildThisFileDirectory)..\jar\android-sdk.aar')">$(MSBuildThisFileDirectory)..\jar\android-sdk.aar</_BugfenderAarPath>
-      <_BugfenderAarPath Condition="'$(_BugfenderAarPath)' == '' And $(TargetFramework.Contains('net10')) And Exists('$(MSBuildThisFileDirectory)..\lib\net10.0-android36.0\android-sdk.aar')">$(MSBuildThisFileDirectory)..\lib\net10.0-android36.0\android-sdk.aar</_BugfenderAarPath>
-      <_BugfenderAarPath Condition="'$(_BugfenderAarPath)' == '' And $(TargetFramework.Contains('net9')) And Exists('$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-sdk.aar')">$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-sdk.aar</_BugfenderAarPath>
       <AndroidLibrary Include="$(_BugfenderAarPath)" Condition="'$(_BugfenderAarPath)' != ''" />
     </ItemGroup>
   </Target>

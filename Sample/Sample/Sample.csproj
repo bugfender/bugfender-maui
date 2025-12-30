@@ -48,7 +48,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" Condition="$(TargetFramework.Contains('net9'))" />
 		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
 				
-		<PackageReference Include="Bugfender.Sdk" Version="4.1.0" />
+		<PackageReference Include="Bugfender.Sdk" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
