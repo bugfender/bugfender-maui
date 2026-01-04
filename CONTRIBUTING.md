@@ -57,6 +57,7 @@ To build the new project you should run:
 
 ```shell
 ./build.sh Release
+./pack.sh
 ````
 
 If you get any error mentioning the workload needs to be restored run:
