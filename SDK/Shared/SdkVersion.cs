@@ -9,7 +9,7 @@ namespace Bugfender.Sdk
         /// <summary>
         /// The MAUI SDK version as an integer (e.g., 20251230 for version 5.0.0)
         /// </summary>
-        public const int Version = 20251230;
+        public const int Version = 20260104;
     }
 }
 
