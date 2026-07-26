@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net10.0;net9.0</TargetFrameworks>
     <PackageId>Bugfender.Sdk</PackageId>
-    <Version>5.0.0</Version>
+    <Version>5.0.1</Version>
     <Title>Bugfender SDK for .NET MAUI</Title>
     <Authors>Bugfender Team</Authors>
     <Owners>Bugfender Team</Owners>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://bugfender.com/</PackageProjectUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>v5.0.0: Updated bundled Bugfender native SDKs to Android 3.6.0 and iOS 2.2.0, including SDK type tagging for MAUI bindings and API URI support.</PackageReleaseNotes>
+    <PackageReleaseNotes>v5.0.1: Bugfixing</PackageReleaseNotes>
     <Copyright>Beenario GmbH</Copyright>
     <PackageTags>logs log xamarin serilog nlog log4net maui net10 net9</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
