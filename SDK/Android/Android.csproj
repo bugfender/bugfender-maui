@@ -17,14 +17,19 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="android-sdk.aar" />
+    <None Remove="android-okhttp.aar" />
   </ItemGroup>
   <ItemGroup>
     <LinkerPreserve Include="Com.Bugfender.Sdk.Bugfender">
-      <VisibleMembers>SetApiUrl;SetBaseUrl;Init;SetMaximumLocalStorageSize;EnableUIEventLogging;EnableCrashReporting;Log;ForceSendOnce;SendIssue;SendCrash;SendUserFeedback</VisibleMembers>
+      <VisibleMembers>SetApiUrl;SetBaseUrl;Init;SetMaximumLocalStorageSize;EnableUIEventLogging;EnableCrashReporting;Log;ForceSendOnce;SendIssue;SendCrash;SendUserFeedback;SetNetworkLoggingEnabled;SetNetworkLoggingCaptureBodies;SetNetworkLoggingCaptureErrorResponseBodies;SetNetworkLoggingURLFilter;SetNetworkLoggingMaxRequestsPerMinute;SetNetworkLoggingRequestObfuscationHandler;SetNetworkLoggingResponseObfuscationHandler</VisibleMembers>
     </LinkerPreserve>
   </ItemGroup>
   <ItemGroup>
     <AndroidLibrary Include="android-sdk.aar" />
+    <AndroidLibrary Include="android-okhttp.aar" Bind="false" />
+    <AndroidMavenLibrary Include="com.squareup.okhttp3:okhttp" Version="4.12.0" Bind="false" VerifyDependencies="false" />
+    <AndroidMavenLibrary Include="com.squareup.okio:okio-jvm" Version="3.6.0" Bind="false" VerifyDependencies="false" />
+    <AndroidJavaSource Include="Java\InstrumentedNetworkHelper.java" />
   </ItemGroup>
   <ItemGroup>
     <TransformFile Include="Transforms\*.xml" />

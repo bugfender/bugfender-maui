@@ -31,7 +31,7 @@
   
   <ItemGroup>
     <LinkerPreserve Include="BugfenderSDK.Bugfender">
-      <VisibleMembers>SetApiURL;SetBaseURL;SetSDKType;ActivateLogger;SetMaximumLocalStorageSize;EnableUIEventLogging;EnableCrashReporting;LogWithLineNumber;ForceSendOnce;SendIssueReturningUrlWithTitle;SendCrashWithTitle;SendUserFeedbackReturningUrlWithSubject</VisibleMembers>
+      <VisibleMembers>SetApiURL;SetBaseURL;SetSDKType;ActivateLogger;SetMaximumLocalStorageSize;EnableUIEventLogging;EnableCrashReporting;LogWithLineNumber;ForceSendOnce;SendIssueReturningUrlWithTitle;SendCrashWithTitle;SendUserFeedbackReturningUrlWithSubject;SetNetworkLoggingEnabled;SetNetworkLoggingCaptureBodies;SetNetworkLoggingCaptureErrorResponseBodies;SetNetworkLoggingRequestObfuscationHandler;SetNetworkLoggingResponseObfuscationHandler;SetNetworkLoggingURLFilterWithAllowlist;SetNetworkLoggingMaxRequestsPerMinute</VisibleMembers>
     </LinkerPreserve>
   </ItemGroup>
   

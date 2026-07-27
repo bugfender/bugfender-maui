@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BugfenderBindingExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBugfenderBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogLevel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NetworkLogging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SdkVersion.cs" />
   </ItemGroup>
 </Project>

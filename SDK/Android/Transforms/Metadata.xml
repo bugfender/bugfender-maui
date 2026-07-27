@@ -1,13 +1,41 @@
 <metadata>
     <!-- Remove incorrect java.util.concurrent.Callable implementation that breaks the C# binding -->
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='K0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='N0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='L0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='H0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='I0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='O0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='M0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='P0']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='X']/implements[@name='java.util.concurrent.Callable']" />
-    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='Y']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='d']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='f1']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='l2']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='q2']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='r']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='r2']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='s2']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='t2']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='u2']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='v']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='w']/implements[@name='java.util.concurrent.Callable']" />
+    <remove-node path="/api/package[@name='com.bugfender.sdk']/class[@name='x0']/implements[@name='java.util.concurrent.Callable']" />
+
+    <!--
+      Release AAR 4.0.1 R8-renames public network-logging types.
+      Map them back to documented names for a stable C# API.
+      Java names: s1/t1 interfaces, u1/v1 data classes.
+      Short R8 names are treated as obfuscated and skipped unless forced.
+    -->
+    <attr path="/api/package[@name='com.bugfender.sdk']/interface[@name='s1']" name="obfuscated">false</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/interface[@name='t1']" name="obfuscated">false</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='u1']" name="obfuscated">false</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='v1']" name="obfuscated">false</attr>
+
+    <attr path="/api/package[@name='com.bugfender.sdk']/interface[@name='s1']" name="managedName">INetworkLoggingRequestObfuscationHandler</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/interface[@name='s1']/method[@name='a']" name="managedName">Obfuscate</attr>
+
+    <attr path="/api/package[@name='com.bugfender.sdk']/interface[@name='t1']" name="managedName">INetworkLoggingResponseObfuscationHandler</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/interface[@name='t1']/method[@name='a']" name="managedName">Obfuscate</attr>
+
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='u1']" name="managedName">NetworkRequestData</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='u1']/method[@name='c' and count(parameter)=0]" name="managedName">GetUrl</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='u1']/method[@name='b' and count(parameter)=0]" name="managedName">GetHeaders</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='u1']/method[@name='a' and count(parameter)=0]" name="managedName">GetBody</attr>
+
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='v1']" name="managedName">NetworkResponseData</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='v1']/method[@name='b' and count(parameter)=0]" name="managedName">GetHeaders</attr>
+    <attr path="/api/package[@name='com.bugfender.sdk']/class[@name='v1']/method[@name='a' and count(parameter)=0]" name="managedName">GetBody</attr>
 </metadata>
