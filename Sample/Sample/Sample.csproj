@@ -47,8 +47,11 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" Condition="$(TargetFramework.Contains('net9'))" />
 		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.70" Condition="$(TargetFramework.Contains('net9'))" />
-				
-		<PackageReference Include="Bugfender.Sdk" Version="5.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\SDK\Android\Android.csproj" Condition="$(TargetFramework.Contains('-android'))" />
+		<ProjectReference Include="..\..\SDK\iOS\iOS.csproj" Condition="$(TargetFramework.Contains('-ios'))" />
 	</ItemGroup>
 
 	<ItemGroup>

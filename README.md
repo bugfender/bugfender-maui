@@ -34,6 +34,8 @@ using Bugfender.Sdk;
             nativeCrashReporting = true,
             mauiCrashReporting = true,
             logUIEvents = true,
+            // networkLoggingEnabled = true,
+            // networkLoggingCaptureBodies = true,
             // maximumLocalStorageSize = 5*1024*1024,
         });
         // some examples on how to use Bugfender
@@ -76,6 +78,8 @@ public class MainApplication : Application
             nativeCrashReporting = true,
             mauiCrashReporting = true,
             logUIEvents = true,
+            // networkLoggingEnabled = true,
+            // networkLoggingCaptureBodies = true,
             // maximumLocalStorageSize = 5*1024*1024,
         });
         // some examples on how to use Bugfender
@@ -94,6 +98,9 @@ Setup:
  * `apiUri` and `baseUri`: are used to point to a specific Bugfender instance, like a specific region or on-prem instance.
  * `nativeCrashReporting` and `mauiCrashReporting`: enable crash reports on the native (iOS/Android) and .NET MAUI stacks.
  * `maximumLocalStorageSize`: changes the amount of storage the log cache can take on disk. The size is in bytes and can be up to 50 megabytes.
+ * `networkLoggingEnabled`: enable HTTP request/response capture (tagged `bf_network`). Defaults to `false`.
+ * `networkLoggingCaptureBodies`: also capture request/response bodies. Defaults to `false`.
+ * `networkLoggingCaptureErrorResponseBodies`: capture response bodies only for HTTP status &gt;= 400 when full body capture is off.
 
 Other `BugfenderBinding` methods that let you control behavior and enable integrations:
 
@@ -122,6 +129,36 @@ Custom device-associated data:
  * `Uri SendIssue(string title, string markdown)`: send information about an exceptional situation you need to look into. This will force all logs in the current session to be sent, even if log sending is disabled.
  * `Uri SendUserFeedback(string subject, string message)`: send user feedback that will appear in the dashboard. This will force all logs in the current session to be sent, even if log sending is disabled.
  * `Uri SendCrash(string title, string text)`: manually send crash information. Usually you do not want to use this, enable automated crash reporting instead. This will force all logs in the current session to be sent, even if log sending is disabled.
+
+Network logging:
+
+ * `void SetNetworkLoggingEnabled(bool enabled)`: enable or disable HTTP capture. Captured entries are sent as logs tagged `bf_network`.
+ * `void SetNetworkLoggingCaptureBodies(bool capture)`: include request/response bodies (apply obfuscation handlers for secrets).
+ * `void SetNetworkLoggingCaptureErrorResponseBodies(bool capture)`: capture response bodies only for HTTP status &gt;= 400 when full body capture is off.
+ * `void SetNetworkLoggingURLFilter(IReadOnlyList<string>? allowlist, IReadOnlyList<string>? denylist)`: wildcard URL filters. Pass `null` for either list to disable that filter.
+ * `void SetNetworkLoggingMaxRequestsPerMinute(int? count)`: rate-limit captured network logs. Pass `null` for no limit.
+ * `void SetNetworkLoggingRequestObfuscationHandler(NetworkLoggingRequestObfuscationHandler? handler)`: C# callback to redact URL/headers/body before sending.
+ * `void SetNetworkLoggingResponseObfuscationHandler(NetworkLoggingResponseObfuscationHandler? handler)`: C# callback to redact response headers/body before sending.
+
+**Platform notes:**
+ * **iOS:** URLSession traffic (including default MAUI `HttpClient`) is instrumented by the native SDK.
+ * **Android:** capture requires OkHttp with the Bugfender interceptor. The NuGet packages `android-okhttp`; call `InstrumentOkHttpBuilder(builder)` on an `OkHttpClient.Builder` Java object (or add the interceptor yourself). Default `HttpClient` / `AndroidMessageHandler` is **not** OkHttp and will not appear as `bf_network` logs.
+
+Example:
+
+```csharp
+bugfender.SetNetworkLoggingEnabled(true);
+bugfender.SetNetworkLoggingCaptureBodies(true);
+bugfender.SetNetworkLoggingRequestObfuscationHandler((url, headers, body) =>
+{
+    var safe = new Dictionary<string, string>(headers);
+    if (safe.ContainsKey("Authorization"))
+        safe["Authorization"] = "***";
+    return new NetworkRequestData(url, safe, body?.Replace("password", "***"));
+});
+bugfender.SetNetworkLoggingResponseObfuscationHandler((headers, body) =>
+    new NetworkResponseData(headers, body));
+```
 
 ## Full reference
 

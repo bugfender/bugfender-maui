@@ -98,6 +98,47 @@ namespace BugfenderSDK
 		double BFLibraryVersionNumber { get; }
 	}
 
+	// @interface BFNetworkRequestData : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BFNetworkRequestData
+	{
+		[Export ("url")]
+		string Url { get; }
+
+		[Export ("headers", ArgumentSemantic.Copy)]
+		NSDictionary Headers { get; }
+
+		[NullAllowed, Export ("body", ArgumentSemantic.Copy)]
+		string Body { get; }
+
+		[Export ("initWithURL:headers:body:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string url, NSDictionary headers, [NullAllowed] string body);
+	}
+
+	// @interface BFNetworkResponseData : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BFNetworkResponseData
+	{
+		[Export ("headers", ArgumentSemantic.Copy)]
+		NSDictionary Headers { get; }
+
+		[NullAllowed, Export ("body", ArgumentSemantic.Copy)]
+		string Body { get; }
+
+		[Export ("initWithHeaders:body:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (NSDictionary headers, [NullAllowed] string body);
+	}
+
+	// typedef BFNetworkRequestData * _Nonnull (^BFNetworkLoggingRequestObfuscationHandler)(NSString *, NSDictionary<NSString *,NSString *> *, NSString * _Nullable);
+	delegate BFNetworkRequestData BFNetworkLoggingRequestObfuscationHandler (string url, NSDictionary headers, [NullAllowed] string body);
+
+	// typedef BFNetworkResponseData * _Nonnull (^BFNetworkLoggingResponseObfuscationHandler)(NSDictionary<NSString *,NSString *> *, NSString * _Nullable);
+	delegate BFNetworkResponseData BFNetworkLoggingResponseObfuscationHandler (NSDictionary headers, [NullAllowed] string body);
+
 	// @interface Bugfender : NSObject
 	[BaseType (typeof(NSObject))]
 	interface Bugfender
@@ -266,5 +307,40 @@ namespace BugfenderSDK
 		[Export ("sendUserFeedbackReturningUrlWithSubject:message:")]
 		[return: NullAllowed]
 		NSUrl SendUserFeedbackReturningUrlWithSubject (string subject, string message);
+
+		// +(void)setNetworkLoggingEnabled:(BOOL)enabled;
+		[Static]
+		[Export ("setNetworkLoggingEnabled:")]
+		void SetNetworkLoggingEnabled (bool enabled);
+
+		// +(void)setNetworkLoggingCaptureBodies:(BOOL)capture;
+		[Static]
+		[Export ("setNetworkLoggingCaptureBodies:")]
+		void SetNetworkLoggingCaptureBodies (bool capture);
+
+		// +(void)setNetworkLoggingCaptureErrorResponseBodies:(BOOL)capture;
+		[Static]
+		[Export ("setNetworkLoggingCaptureErrorResponseBodies:")]
+		void SetNetworkLoggingCaptureErrorResponseBodies (bool capture);
+
+		// +(void)setNetworkLoggingRequestObfuscationHandler:(BFNetworkLoggingRequestObfuscationHandler _Nullable)handler;
+		[Static]
+		[Export ("setNetworkLoggingRequestObfuscationHandler:")]
+		void SetNetworkLoggingRequestObfuscationHandler ([NullAllowed] BFNetworkLoggingRequestObfuscationHandler handler);
+
+		// +(void)setNetworkLoggingResponseObfuscationHandler:(BFNetworkLoggingResponseObfuscationHandler _Nullable)handler;
+		[Static]
+		[Export ("setNetworkLoggingResponseObfuscationHandler:")]
+		void SetNetworkLoggingResponseObfuscationHandler ([NullAllowed] BFNetworkLoggingResponseObfuscationHandler handler);
+
+		// +(void)setNetworkLoggingURLFilterWithAllowlist:(NSArray<NSString *> * _Nullable)allowlist denylist:(NSArray<NSString *> * _Nullable)denylist;
+		[Static]
+		[Export ("setNetworkLoggingURLFilterWithAllowlist:denylist:")]
+		void SetNetworkLoggingURLFilterWithAllowlist ([NullAllowed] string[] allowlist, [NullAllowed] string[] denylist);
+
+		// +(void)setNetworkLoggingMaxRequestsPerMinute:(NSNumber * _Nullable)count;
+		[Static]
+		[Export ("setNetworkLoggingMaxRequestsPerMinute:")]
+		void SetNetworkLoggingMaxRequestsPerMinute ([NullAllowed] NSNumber count);
 	}
 }

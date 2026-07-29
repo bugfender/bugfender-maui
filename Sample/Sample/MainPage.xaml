@@ -76,6 +76,14 @@
                 Clicked="OnTestCrashClicked"
                 HorizontalOptions="Center" />
 
+            <Button
+                x:Name="TestNetworkBtn"
+                Text="Send Test Network Request"
+                BackgroundColor="#2196F3"
+                TextColor="White"
+                Clicked="OnTestNetworkClicked"
+                HorizontalOptions="Center" />
+
             <!-- Device Info Section -->
             <Border Stroke="#9C27B0" StrokeThickness="2" Background="#4A148C" Padding="12,8" HorizontalOptions="Center">
                 <Label x:Name="DeviceInfoLabel" FontSize="12" HorizontalOptions="Center" TextColor="White" />

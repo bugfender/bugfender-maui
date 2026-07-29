@@ -146,6 +146,44 @@ This is a test issue sent from the Bugfender {_dotNetVersion} MAUI sample app to
 			throw new InvalidOperationException($"🧪 Test crash from Bugfender {_dotNetVersion} MAUI sample app - this is intentional for testing crash reporting!");
 		}
 	}
+
+	private async void OnTestNetworkClicked(object sender, EventArgs e)
+	{
+		var bugfender = BugfenderBinding.Instance;
+		bugfender.Info("Starting network logging test request");
+
+		try
+		{
+			// Android: .NET HttpClient is NOT OkHttp — use the instrumented OkHttp helper
+			var result = await Task.Run(() => bugfender.SendInstrumentedNetworkRequest(
+				"https://httpbin.org/post",
+				method: "POST",
+				body: "{\"username\":\"demo\",\"password\":\"super-secret\"}",
+				headers: new Dictionary<string, string>
+				{
+					["Authorization"] = "Bearer secret-token",
+					["X-Demo"] = "maui-network-logging",
+					["Content-Type"] = "application/json; charset=utf-8",
+				}));
+
+			bugfender.Info(
+				$"Network test completed: {result.Status}, shouldCapture={result.ShouldCapture}, reqId={result.RequestId}");
+			bugfender.ForceSendOnce();
+
+			await DisplayAlert(
+				"Bugfender",
+				$"✅ Instrumented network request finished ({result.Status}).\n\n" +
+				$"shouldCapture={result.ShouldCapture}\nreqId={result.RequestId}\n\n" +
+				"Check bf_network / Network tab in the dashboard.\n" +
+				"Authorization/password should be redacted by obfuscation handlers.",
+				"OK");
+		}
+		catch (Exception ex)
+		{
+			bugfender.Error($"Test network request failed: {ex.Message}");
+			await DisplayAlert("Bugfender", $"❌ Network request failed:\n{ex.Message}", "OK");
+		}
+	}
 }
 
 

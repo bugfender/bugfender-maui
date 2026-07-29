@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Foundation;
+
 namespace Bugfender.Sdk
 {
     public partial class BugfenderBinding : IBugfenderBinding
@@ -61,6 +64,8 @@ namespace Bugfender.Sdk
                 AppDomain.CurrentDomain.UnhandledException += AppDomainExceptionHandler;
                 TaskScheduler.UnobservedTaskException += UnobservedTaskExceptionHandler;
             }
+
+            ApplyNetworkLoggingOptions(options);
         }
 
         public Uri? DeviceUri
@@ -212,6 +217,201 @@ namespace Bugfender.Sdk
             if (urlString == null)
                 return null;
             return new Uri(urlString);
+        }
+
+        public void SetNetworkLoggingEnabled(bool enabled)
+        {
+            BugfenderSDK.Bugfender.SetNetworkLoggingEnabled(enabled);
+        }
+
+        public void SetNetworkLoggingCaptureBodies(bool capture)
+        {
+            BugfenderSDK.Bugfender.SetNetworkLoggingCaptureBodies(capture);
+        }
+
+        public void SetNetworkLoggingCaptureErrorResponseBodies(bool capture)
+        {
+            BugfenderSDK.Bugfender.SetNetworkLoggingCaptureErrorResponseBodies(capture);
+        }
+
+        public void SetNetworkLoggingURLFilter(IReadOnlyList<string>? allowlist, IReadOnlyList<string>? denylist)
+        {
+            BugfenderSDK.Bugfender.SetNetworkLoggingURLFilterWithAllowlist(
+                allowlist == null ? null : allowlist as string[] ?? allowlist.ToArray(),
+                denylist == null ? null : denylist as string[] ?? denylist.ToArray());
+        }
+
+        public void SetNetworkLoggingMaxRequestsPerMinute(int? count)
+        {
+            BugfenderSDK.Bugfender.SetNetworkLoggingMaxRequestsPerMinute(
+                count.HasValue ? NSNumber.FromInt32(count.Value) : null);
+        }
+
+        public void SetNetworkLoggingRequestObfuscationHandler(NetworkLoggingRequestObfuscationHandler? handler)
+        {
+            if (handler == null)
+            {
+                BugfenderSDK.Bugfender.SetNetworkLoggingRequestObfuscationHandler(null);
+                return;
+            }
+
+            BugfenderSDK.Bugfender.SetNetworkLoggingRequestObfuscationHandler((url, headers, body) =>
+            {
+                var managed = handler(url ?? "", ToManagedHeaders(headers), body);
+                return new BugfenderSDK.BFNetworkRequestData(
+                    managed.Url,
+                    ToNativeHeaders(managed.Headers),
+                    managed.Body);
+            });
+        }
+
+        public void SetNetworkLoggingResponseObfuscationHandler(NetworkLoggingResponseObfuscationHandler? handler)
+        {
+            if (handler == null)
+            {
+                BugfenderSDK.Bugfender.SetNetworkLoggingResponseObfuscationHandler(null);
+                return;
+            }
+
+            BugfenderSDK.Bugfender.SetNetworkLoggingResponseObfuscationHandler((headers, body) =>
+            {
+                var managed = handler(ToManagedHeaders(headers), body);
+                return new BugfenderSDK.BFNetworkResponseData(
+                    ToNativeHeaders(managed.Headers),
+                    managed.Body);
+            });
+        }
+
+        /// <inheritdoc />
+        public InstrumentedNetworkResult SendInstrumentedNetworkRequest(
+            string url,
+            string method = "GET",
+            string? body = null,
+            IReadOnlyDictionary<string, string>? headers = null)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                url = "https://example.com/";
+            }
+
+            string httpMethod = string.IsNullOrWhiteSpace(method) ? "GET" : method.ToUpperInvariant();
+            using var request = new NSMutableUrlRequest(NSUrl.FromString(url)!);
+            request.HttpMethod = httpMethod;
+
+            var headerDict = new NSMutableDictionary();
+            bool hasAuthorization = false;
+            if (headers != null)
+            {
+                foreach (var pair in headers)
+                {
+                    if (string.IsNullOrEmpty(pair.Key) || pair.Value == null)
+                    {
+                        continue;
+                    }
+                    if (string.Equals(pair.Key, "Authorization", StringComparison.OrdinalIgnoreCase))
+                    {
+                        hasAuthorization = true;
+                    }
+                    headerDict[pair.Key] = new NSString(pair.Value);
+                }
+            }
+            if (!hasAuthorization)
+            {
+                headerDict["Authorization"] = new NSString("secret-token");
+            }
+            request.Headers = headerDict;
+
+            if (httpMethod is "POST" or "PUT" or "PATCH")
+            {
+                var payload = body ?? "{}";
+                request.Body = NSData.FromString(payload, NSStringEncoding.UTF8);
+                if (request.Headers == null || request.Headers["Content-Type"] == null)
+                {
+                    var withContentType = new NSMutableDictionary(headerDict);
+                    withContentType["Content-Type"] = new NSString("application/json; charset=utf-8");
+                    request.Headers = withContentType;
+                }
+            }
+
+            var semaphore = new System.Threading.ManualResetEventSlim(false);
+            NSUrlResponse? urlResponse = null;
+            NSError? error = null;
+
+            NSUrlSession.SharedSession.CreateDataTask(request, (data, response, err) =>
+            {
+                urlResponse = response;
+                error = err;
+                semaphore.Set();
+            }).Resume();
+
+            if (!semaphore.Wait(TimeSpan.FromSeconds(20)))
+            {
+                BugfenderSDK.Bugfender.ForceSendOnce();
+                throw new TimeoutException("Instrumented network request timed out");
+            }
+
+            BugfenderSDK.Bugfender.ForceSendOnce();
+
+            if (error != null)
+            {
+                throw new InvalidOperationException(error.LocalizedDescription ?? "network_error");
+            }
+
+            int status = 0;
+            if (urlResponse is NSHttpUrlResponse httpResponse)
+            {
+                status = (int)httpResponse.StatusCode;
+            }
+
+            return new InstrumentedNetworkResult(status, shouldCapture: true, requestId: null);
+        }
+
+        private static void ApplyNetworkLoggingOptions(BugfenderOptions options)
+        {
+            if (options.networkLoggingEnabled)
+            {
+                BugfenderSDK.Bugfender.SetNetworkLoggingEnabled(true);
+            }
+            if (options.networkLoggingCaptureBodies)
+            {
+                BugfenderSDK.Bugfender.SetNetworkLoggingCaptureBodies(true);
+            }
+            if (options.networkLoggingCaptureErrorResponseBodies)
+            {
+                BugfenderSDK.Bugfender.SetNetworkLoggingCaptureErrorResponseBodies(true);
+            }
+        }
+
+        private static IDictionary<string, string> ToManagedHeaders(NSDictionary? headers)
+        {
+            var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            if (headers == null)
+            {
+                return result;
+            }
+
+            foreach (var key in headers.Keys)
+            {
+                var keyString = key?.ToString();
+                if (keyString == null)
+                {
+                    continue;
+                }
+                result[keyString] = headers.ObjectForKey(key)?.ToString() ?? "";
+            }
+            return result;
+        }
+
+        private static NSDictionary ToNativeHeaders(IDictionary<string, string> headers)
+        {
+            var keys = new List<NSString>();
+            var values = new List<NSString>();
+            foreach (var pair in headers)
+            {
+                keys.Add(new NSString(pair.Key));
+                values.Add(new NSString(pair.Value ?? ""));
+            }
+            return NSDictionary.FromObjectsAndKeys(values.ToArray(), keys.ToArray());
         }
 
         private static void AppDomainExceptionHandler(object? sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)

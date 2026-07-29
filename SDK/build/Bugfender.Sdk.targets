@@ -1,8 +1,9 @@
 <Project>
-  <!-- Android: Include AAR -->
+  <!-- Android: Include AARs -->
   <Target Name="_BugfenderSdkIncludeAar" BeforeTargets="ResolveLibraryProjectImports" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
     <PropertyGroup>
       <_BugfenderAarPath></_BugfenderAarPath>
+      <_BugfenderOkHttpAarPath></_BugfenderOkHttpAarPath>
     </PropertyGroup>
     <PropertyGroup Condition="Exists('$(MSBuildThisFileDirectory)..\jar\android-sdk.aar')">
       <_BugfenderAarPath>$(MSBuildThisFileDirectory)..\jar\android-sdk.aar</_BugfenderAarPath>
@@ -13,8 +14,18 @@
     <PropertyGroup Condition="'$(_BugfenderAarPath)' == '' And $(TargetFramework.Contains('net9')) And Exists('$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-sdk.aar')">
       <_BugfenderAarPath>$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-sdk.aar</_BugfenderAarPath>
     </PropertyGroup>
+    <PropertyGroup Condition="Exists('$(MSBuildThisFileDirectory)..\jar\android-okhttp.aar')">
+      <_BugfenderOkHttpAarPath>$(MSBuildThisFileDirectory)..\jar\android-okhttp.aar</_BugfenderOkHttpAarPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(_BugfenderOkHttpAarPath)' == '' And $(TargetFramework.Contains('net10')) And Exists('$(MSBuildThisFileDirectory)..\lib\net10.0-android36.0\android-okhttp.aar')">
+      <_BugfenderOkHttpAarPath>$(MSBuildThisFileDirectory)..\lib\net10.0-android36.0\android-okhttp.aar</_BugfenderOkHttpAarPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(_BugfenderOkHttpAarPath)' == '' And $(TargetFramework.Contains('net9')) And Exists('$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-okhttp.aar')">
+      <_BugfenderOkHttpAarPath>$(MSBuildThisFileDirectory)..\lib\net9.0-android35.0\android-okhttp.aar</_BugfenderOkHttpAarPath>
+    </PropertyGroup>
     <ItemGroup>
       <AndroidLibrary Include="$(_BugfenderAarPath)" Condition="'$(_BugfenderAarPath)' != ''" />
+      <AndroidLibrary Include="$(_BugfenderOkHttpAarPath)" Bind="false" Condition="'$(_BugfenderOkHttpAarPath)' != ''" />
     </ItemGroup>
   </Target>
   
@@ -38,4 +49,3 @@
     </ItemGroup>
   </Target>
 </Project>
-
